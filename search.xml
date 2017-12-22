@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Termination of Arukas]]></title>
+    <url>%2F2017%2F07%2F27%2Ftermination-of-Arukas%2F</url>
+    <content type="text"><![CDATA[Docker 容器托管服务Arukas beta 31号就要停止服务了，从此少一个好用的免费VPN…… NOTICE]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Python 弱引用]]></title>
+    <url>%2F2017%2F05%2F23%2Fpython-weakref%2F</url>
+    <content type="text"><![CDATA[Python 的 weakref 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁； 但是有时候我们希望在内存需要的时候更早地销毁一个对象，比如发生循环引用时，或者在建立一个对象缓存时；弱引用不能保证对象不被销毁，当一个对象只存在弱引用时，它也会被销毁，弱引用的一个基本用法就是实现缓存和大对象映射，使一个大对象不会因为存在于缓存或者一个键值对中而避免被销毁；例如，我们有一些大的二进制图片对象，现在打算把他们和名称一一对应，如果使用 Python 的 dictionary 将名称映射到图片对象（或者反过来），图片对象会一直存在于内存中，因为它们依然作为字典的值（或者键）存在，弱引用可以解决这个问题，使用基于weakref模块实现的 WeakKeyDictionary和 WeakValueDictionary,用弱引用来构造映射关系，我们假设图片对象是WeakValueDictionary的值，当该对象的引用只是 weak mapping 中的弱引用时，GC会回收该对象，weak mapping 中对应的条目也会被删除；一些内建类型比如 list， dict不直接支持弱引用，但可以通过子类增加弱引用支持；对对象的弱引用不会增加其引用计数，见下面代码： 123456789101112131415161718192021222324import sysimport weakrefclass A(object): passa = A()print sys.getrefcount(a) # 2b = aprint sys.getrefcount(a) # 3c = weakref.ref(a)print sys.getrefcount(a) # 3print weakref.getweakrefcount(a) # 1del bprint sys.getrefcount(a) # 2del cprint sys.getrefcount(a) # 2print weakref.getweakrefcount(a) # 0 从上面的例子可以看到，对对象的弱引用使用单独的计数器；之所以第一次获取引用计数结果是2而不是1，是因为把a当参数传入了getrefcount()方法；总结，弱引用主要解决垃圾回收的问题，多用在处理对象缓存和循环引用问题上；回顾一下弱引用在 django 中使用的场景，Signal 类初始化的时候就定义了一个receiver 缓存，在连接&nbsp;receiver 和信号的时候，默认对 receiver 使用弱引用；weakref 模块的方法和属性详见weakref 相关文档：https://pymotw.com/2/weakref/index.html]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[No no no]]></title>
+    <url>%2F2014%2F09%2F27%2Fno-no-no%2F</url>
+    <content type="text"><![CDATA[Don’t anybody come 惊扰我的幻光 当我需要在这个时间掏出钥匙 这扇门 就是一道梦幻的分隔 窗台上的植物 分明一动不动 又分明在变化 像靠在墙角的娃娃 脑袋圆圆的娃娃 恍恍惚惚 置身于幻光 在心里有一道意识 别碰它 一碰就碎 我也像那盆草 那盆花 一动也不动 我们都小心翼翼啊 假装不得动弹 Don’t anybody come 惊扰我的幻光 只看着它 渐变昏黄]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[毕业季的阳光]]></title>
+    <url>%2F2012%2F05%2F31%2Fsunshine-in-graduation-season%2F</url>
+    <content type="text"><![CDATA[走进西侧门的时候阳光正烈我的背已经被书包捂出汗 去食堂的小道上没几个人影我才意识到只有像我们这样没课的大四众才能随时享受食堂满是空座的待遇现在离下课还有一刻钟的时间到处都是空座位巴巴地站在桌旁看别人吃东西的情形似乎不会在这里出现我吃完离开的时候来食堂的人才多了起来 我要找个地方改论文去图书馆得拿卡信息楼好像比三教远那么一点 这次的靠近三教 有点微妙不一样它好像有强大的压力隔绝外界所有在走近三教的过程中我感觉不到有一丝声音出现在我耳中 一个人与我擦身而过这时候的三教 是一头睡着的庞然大物迎面走来的刚从教室出来的学弟学妹边走边讨论着什么我看到他们嘴唇在动 四年前刚来的时候看三五成群的人谈笑着与我擦身而过我在世界之外四年后要离开的时候看三五成群的人谈笑着与我擦身而过我在世界之外始点与终点之间 似乎没那么遥远 我继续我的行走 没有回头不知道他们会不会回头指着对同伴笑说：你看，那个人是不是很像一只狗……]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[狗]]></title>
+    <url>%2F2011%2F10%2F04%2Fdog%2F</url>
+    <content type="text"><![CDATA[傍晚的时候 路上遛狗的人不少 狗永远走在前面 也远比人活力 偶尔一人一狗迎面碰到另一人一狗 两狗相互狂吠 不知是示好还是示恶 或者只是打招呼 结果都是 稍停一秒 然后错过 姑且对两狗表示一下同情 它们却很安然 绳索困住自由似乎已经被接受 它们继续晃晃悠悠地行进 就像根本没有什么 同类 就在刚刚与自己擦身而过 我看着这只大黑狗 错过两只小白狗之后快乐的前进 不要想太多 或许它调戏的目的已经达到]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[XX 的胡思乱想]]></title>
+    <url>%2F2011%2F02%2F06%2Fwild-mind%2F</url>
+    <content type="text"><![CDATA[当一个人的时候 我不属于这个世界 一条空街 只为我一个人准备 有时候 像是在活给另一个自己看 闭上眼睛 捂住耳朵 感受水打在头顶 要么成为传奇 要么成为疯子 那必定是传奇 在空旷的地方 感受声音的来源 像穿梭在不同的时空 或许真的是也不一定 谁能定论 做到从心所欲 还没有那种魄力 顾忌太多 平静得可怕 似乎能从潜意识里忽略周围的一切 人和事物 毫不自知 没有什么能引起一丝涟漪 都是我世界里的投影 越是认真执着的 越显得荒唐幼稚 俯瞰 情不自禁的笑 笑什么 你想太多了]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[不可辜负]]></title>
+    <url>%2F2010%2F11%2F23%2Fsound-of-memory%2F</url>
+    <content type="text"><![CDATA[《Hotel California》 一整首歌都是前奏 一整首歌没有前奏 带我回高中 带我回520 《You are my love》 无法解释的独一无二 《How Could I》 无妨只记得一句词 “so how could i” 《Butterfly Wings》 即使戴着耳机也会怀疑 哪里来的声音 《Angel》 特别喜欢一个词 《I miss you》 整颗星球只剩我 i miss you 《Kiss the rain》 从第一个音符 就不省人事 《tears》 第一次听到 是在什么时候 《When you told me you loved me》 一度百听不厌 《The Blower’s Daughter》 Can&apos;t take my eyes off you Can&apos;t take my mind off you 《I don’t want to say goodbye》 原来是断背山 没有情绪 《世上只有》 你是风景 我是过客 《So goodbye》 15岁 20岁 了无痕迹 《让每个人都心碎》 恣意跌宕的舒畅 释放 《Mad World》 am i running in circles 被篝火人群抛弃的寒风 《Everybody hurts》 只是有时候 《美丽心情》 在早晨清新的阳光里 看着当年写的日记 《如果的事》 You wake me up ~ 《I’m in here》 很长一段时间 兔子的电脑里没有发出过其他声音 《当我再爱你的时候》 听到的 是一个故事 《太多》 一个人在家里看电视剧的日子一去不复返 《I catch a cold》 西巴拉古不理你 《Bressanone》 群狼的伤口 《我怀念的》 我怀念的风景和浮云 《The rain (kikujiro)》 多少次恰巧在下雨的时候听到 后半部分暂且无视 《真的爱你》 记忆不因遥远淡薄 《Scarborough Fair》 因为这首歌才看的《毕业生》 金门桥上的红色跑车很有feel 《素敌》 Final Fantasy 《Indescribable Night》 迷离雪夜 遗世独立 《求爱复刻版》 这种歌 只适合蓦然回首 《星之所在》 《与你共乘》 它们完全不同 我却分辨不开 《Unchained Melody》 无关人鬼情未了 《再见-警察》 到底有没有歌词 《Sound of Silence》 为什么会联想到《毕业生》 《天地孤影任我行》 名字不够霸气 《下雨天》 真的像在下雨 《彩虹糖》 “你去吗？” 《我愿意》 还是王菲的好听 《宝贝》 怎么是女声？ 《童话》 等一句佳人绽笑 少年开怀 《Promises Don’t come easy》 怎么不知不觉 就到下一曲了 《Holiday》 我也爱摇滚 《Don’t cry for me Argentina》 《冷雨夜》《喜欢你》 Beyond N年相隔 《你不知道的事》 我们都是听一遍 就喜欢上了 《暗恋》 这货不是陶吉吉 这货不是陶吉吉 《左边》 不是那么那么好听 但是灰常灰常有感觉 《老男孩》 我们像是老相识了 《独家记忆》 在它开始暗淡的时候听到，于是真的开始暗淡了…… 《Song from a secret garden》 一直误以为来自久石让 《Valder Fields》 懒懒的阳光沙滩 《When You Say Nothing At All》 Ronan Keating 《指环王》 原来Enya不是歌名 是歌手名 《情书》 等待着别人给幸福的人往往过得都不怎么幸福 《心跳》 再一次听 完全不一样的感觉 《纯文艺恋爱》 槟城下的雨 《K歌之王》 K歌之王 只能征服麦克风 《好久不见》 独家记忆一样的唏嘘 《故乡的原风景》 像天气预报 《岛歌》 那么轻 那么轻 《对你说》 应该是夏天 《假如真的有约会》 当年每个周末才能看两集《我和僵尸有个约会》，满心期待，现在一天就能看十几集，却不复当年，反而当听到这首歌的时候更容易找回久违的感觉 “天佑” “小玲……” 《我不怕输》 记得踩着很厚的积雪去参加魔鬼电路考试 没有觉得自己能过 没有不过 《爱 转角》 这歌比电视剧优秀得多 《Il Mio Amico》 听不懂歌词？没关系！ 《I’m yours》 原来Jason Mraz 《Vincent》 《喜欢两个人》 Song of the year -- 2015 一个人回北京的火车上偶然听到，从此它就是一首被烙印的歌； 《小幸运》 Song of the year -- 2016 有一些歌初一入耳无感，后来因为机缘慢慢融入了情感，变得动人；有一些歌一入耳就能被其旋律惊艳，而后也只是惊艳而已；还有一首 小幸运 ； 《Butterfly》 &amp; 《Brave heart》 刨去少年的寄托，每一个音符也能激荡热血]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[老房子]]></title>
+    <url>%2F2010%2F11%2F19%2Fthe-old-house%2F</url>
+    <content type="text"><![CDATA[我有一间老房子 住着黄昏的破屋与大河 烟囱和桥梁 飘雪的夜晚里 紫色的长阶梯 半开着门的旧楼房 水泥路边独树一帜的木屋 被斑驳阳光装饰的铁门 闪烁着的叶的影子 如丝细雨 荒凉山路 夏天静谧的小镇 没有声音 也没有风 到了尽头的巷子 名叫大概胡蝶梦 耀眼的阳光 融化了一圈树叶和白云 日历上摆动的老时钟 嗒嗒嗒 凝望着 窗户下安静看书的小娃娃 枝桠上独舞的红丝带 阴沉的乌云 肃杀的古堡 烫金的晚霞 利剑般的高楼大厦 沧海明月 两处天涯 我有一间老房子 名字 叫《遗忘》 住着黄昏的破屋与大河 烟囱和桥梁]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[生命中太多的幻光 不能追逐]]></title>
+    <url>%2F2010%2F09%2F27%2Fpursuit-of-light%2F</url>
+    <content type="text"><![CDATA[.]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[久石让]]></title>
+    <url>%2F2010%2F01%2F09%2Fjoe-hisaishi%2F</url>
+    <content type="text"><![CDATA[久石让 你的音乐来自哪里 ……]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[cymm wxsm]]></title>
+    <url>%2F2009%2F07%2F23%2Fcymm-wxsm%2F</url>
+    <content type="text"><![CDATA[不是睡不着 ­ 是电池还没有耗尽­ 好久沒遇上下雨了 這兩天卻都在下雨 狂暴地下 明明還沒到該天黑的時候 天黑了 只隐约知道外头在下雨 等我再次回過神來 只有清涼的風和一地的積水 天又亮了 其實一直在天上 只是沒有落下來 下雨之前 既悶又熱 下過雨之後 涼爽了許多 踩著被積水包圍的已經干了的地方向外走 涼風突然吹在身上 不由自主地摩擦雙臂 短暫的刺激過後 我放下雙手 開始享受夏天難得的涼風 就算不是太陽 有這風 也能讓人十分舒服的 虧得下雨了 不然 還真忘記了夏天也不都是豔陽高照的 呵呵……]]></content>
+      <categories>
+        <category>随感</category>
+      </categories>
+      <tags>
+        <tag>年少荒唐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[匆匆那年]]></title>
+    <url>%2F2009%2F05%2F17%2Ftime-flies%2F</url>
+    <content type="text"><![CDATA[十六岁的时候你在做什么那时同学的名字还能一字不漏地念出来吧 当初牵着的手如今握紧了谁偷偷许过誓言吗实现了还是已经全部忘了]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[夏天的味道]]></title>
+    <url>%2F2009%2F04%2F13%2Fscent-of-summer%2F</url>
+    <content type="text"><![CDATA[我到图书馆的时候，那儿人还不多，屋里很亮，很安静。看书看了没多久，我也趴桌子上了，迷迷糊糊中，仿佛听到风扇转动的声音，睁眼，没有发现风扇，却让我突然之间闻到了夏天的味道…… “中午，刚吃完饭，大家都趴在桌子上，没有人说话，大家都睡着了，窗外，树上的的树叶在晃动，却听不见它们发出的声响，耳边传来风扇搅动的声音，夹杂着笔尖划过纸面的沙沙声，偶尔传来的一两句低语，并没有显得格格不入，所有的声音都是那么孤独,有时候，天上飘过一朵云，原本明亮的房间突然暗了下来，而后又缓缓变亮……躁动在安详中消亡。” 艳阳，暖风，还有永远都飞不尽的飞絮……]]></content>
+  </entry>
+</search>
