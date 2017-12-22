@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="Python 的 weakref 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/12/22/hello-world/index.html">
+<meta property="og:title" content="Python 弱引用">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/python-weakref/index.html">
 <meta property="og:site_name" content=":: Haku&#39;s ::">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Python 的 weakref 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁；">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-22T02:21:49.836Z">
+<meta property="og:updated_time" content="2017-12-21T13:36:15.565Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Python 弱引用">
+<meta name="twitter:description" content="Python 的 weakref 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁；">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/22/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/23/python-weakref/"/>
 
 
 
 
 
-  <title>Hello World | :: Haku's ::</title>
+  <title>Python 弱引用 | :: Haku's ::</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/22/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/python-weakref/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Haku">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">Python 弱引用</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-22T10:21:49+08:00">
-                2017-12-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T01:35:34+08:00">
+                2017-05-23
               </time>
             
 
@@ -299,15 +299,12 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>Python 的 <code><a href="https://docs.python.org/2/library/weakref.html" target="_blank" rel="noopener">weakref</a></code> 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁；</p>
+<a id="more"></a>
+<p>但是有时候我们希望在内存需要的时候更早地销毁一个对象，比如发生循环引用时，或者在建立一个对象缓存时；弱引用不能保证对象不被销毁，当一个对象只存在弱引用时，它也会被销毁，<br>弱引用的一个基本用法就是实现缓存和大对象映射，使一个大对象不会因为存在于缓存或者一个键值对中而避免被销毁；<br>例如，我们有一些大的二进制图片对象，现在打算把他们和名称一一对应，<br>如果使用 Python 的 dictionary 将名称映射到图片对象（或者反过来），<br>图片对象会一直存在于内存中，因为它们依然作为字典的值（或者键）存在，弱引用可以解决这个问题，<br>使用基于<code>weakref</code>模块实现的 <code>WeakKeyDictionary</code>和 <code>WeakValueDictionary</code>,<br>用弱引用来构造映射关系，我们假设图片对象是<code>WeakValueDictionary</code>的值，<br>当该对象的引用只是 weak mapping 中的弱引用时，GC会回收该对象，<br>weak mapping 中对应的条目也会被删除；<br>一些内建类型比如 <code>list</code>， <code>dict</code>不直接支持弱引用，但可以通过子类增加弱引用支持；<br>对对象的弱引用不会增加其引用计数，见下面代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import weakref</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line"><span class="built_in">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line">b = a</span><br><span class="line"><span class="built_in">print</span> sys.getrefcount(a)            <span class="comment"># 3</span></span><br><span class="line"></span><br><span class="line">c = weakref.ref(a)</span><br><span class="line"><span class="built_in">print</span> sys.getrefcount(a)            <span class="comment"># 3</span></span><br><span class="line"><span class="built_in">print</span> weakref.getweakrefcount(a)    <span class="comment"># 1</span></span><br><span class="line"></span><br><span class="line">del b</span><br><span class="line"><span class="built_in">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line">del c</span><br><span class="line"><span class="built_in">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"><span class="built_in">print</span> weakref.getweakrefcount(a)    <span class="comment"># 0</span></span><br></pre></td></tr></table></figure>
+<p>从上面的例子可以看到，对对象的弱引用使用单独的计数器；之所以第一次获取引用计数结果是2而不是1，是因为<br>把<code>a</code>当参数传入了<code>getrefcount()</code>方法；<br>总结，弱引用主要解决垃圾回收的问题，多用在处理对象缓存和循环引用问题上；<br>回顾一下弱引用在 django 中使用的场景，Signal 类初始化的时候就定义了一个receiver 缓存，<br>在连接&nbsp;receiver 和信号的时候，默认对 receiver 使用弱引用；<br><code>weakref</code> 模块的方法和属性详见<a href="https://docs.python.org/2/library/weakref.html" target="_blank" rel="noopener">weakref</a></p>
+<p>相关文档：<a href="https://pymotw.com/2/weakref/index.html" target="_blank" rel="noopener">https://pymotw.com/2/weakref/index.html</a></p>
 
       
     </div>
@@ -328,6 +325,26 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/09/27/no-no-no/" rel="next" title="No no no">
+                <i class="fa fa-chevron-left"></i> No no no
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/27/termination-of-Arukas/" rel="prev" title="Termination of Arukas">
+                Termination of Arukas <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -376,17 +393,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -401,14 +409,32 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -430,22 +456,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
