@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。 ###任务计划集群化Windows Server 2012 之前，我们可以在集群的节点上部署任务，">
+<meta name="description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。">
 <meta name="keywords" content="scheduled task,Windows service,clustered">
 <meta property="og:type" content="article">
 <meta property="og:title" content="任务计划与windows服务的集群化">
 <meta property="og:url" content="http://b.kohaku.cc/2017/12/26/clustered-tasks-and-services/index.html">
 <meta property="og:site_name" content=":: Haku&#39;s ::">
-<meta property="og:description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。 ###任务计划集群化Windows Server 2012 之前，我们可以在集群的节点上部署任务，">
+<meta property="og:description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-26T09:30:53.719Z">
+<meta property="og:updated_time" content="2017-12-26T09:36:58.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="任务计划与windows服务的集群化">
-<meta name="twitter:description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。 ###任务计划集群化Windows Server 2012 之前，我们可以在集群的节点上部署任务，">
+<meta name="twitter:description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。">
 
 
 
@@ -354,13 +354,14 @@
 
       
         <p>我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。</p>
-<p>###任务计划集群化<br>Windows Server 2012 之前，我们可以在集群的节点上部署任务，但是任务计划程序对整个集群是不感知的，手动管理各个节点上的任务计划比较容易出错，尤其是在节点多的情况下，Windows Server 2012 以后，通过Cluster Scheduled Tasks 可以十分简单地通过PowerShell 来管理集群上的任务计划，只需要在任意一个节点上注册任务。比较常用的是AnyNode 模式，任务计划在任意一个节点上启用，在其他节点都处于禁用状态。</p>
+<a id="more"></a>
+<h3 id="任务计划集群化"><a href="#任务计划集群化" class="headerlink" title="任务计划集群化"></a>任务计划集群化</h3><p>Windows Server 2012 之前，我们可以在集群的节点上部署任务，但是任务计划程序对整个集群是不感知的，手动管理各个节点上的任务计划比较容易出错，尤其是在节点多的情况下，Windows Server 2012 以后，通过Cluster Scheduled Tasks 可以十分简单地通过PowerShell 来管理集群上的任务计划，只需要在任意一个节点上注册任务。比较常用的是AnyNode 模式，任务计划在任意一个节点上启用，在其他节点都处于禁用状态。</p>
 <p>对于已存在的任务计划，可以先导出xml，以该文件名作为参数进行任务注册，这样就不用单独配置触发器了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Register-ClusteredScheduledTask -TaskName MyTask -Cluster MyCluster -Xml <span class="variable">$xmlFile</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>注意： 使用xml参数的时候首选需要保证任务计划用户在各个节点上都存在</p>
 </blockquote>
 <p>详见 <a href="https://blogs.msdn.microsoft.com/clustering/2012/05/31/how-to-configure-clustered-tasks-with-windows-server-2012/" target="_blank" rel="noopener">How to Configure Clustered Tasks with Windows Server 2012</a></p>
-<p>###Windows service集群化<br>Windows Service 不能感知到整个集群，因此Windows Service集群化需要首先在各个节点上安装服务，然后再在故障转移集群管理器中添加服务。</p>
+<h3 id="Windows-service集群化"><a href="#Windows-service集群化" class="headerlink" title="Windows service集群化"></a>Windows service集群化</h3><p>Windows Service 不能感知到整个集群，因此Windows Service集群化需要首先在各个节点上安装服务，然后再在故障转移集群管理器中添加服务。</p>
 <p>参考<a href="https://www.1e.com/blogs/2014/11/17/creating-a-windows-cluster-part-5-adding-applications-and-services-to-the-cluster/" target="_blank" rel="noopener">Creating a Windows Cluster: Part 5 – Adding Applications and Services to the Cluster</a></p>
 
       
@@ -459,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -526,6 +536,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务计划集群化"><span class="nav-number">1.</span> <span class="nav-text">任务计划集群化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-service集群化"><span class="nav-number">2.</span> <span class="nav-text">Windows service集群化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
