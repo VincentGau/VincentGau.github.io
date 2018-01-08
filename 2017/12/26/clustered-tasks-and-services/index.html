@@ -87,7 +87,7 @@
 <meta property="og:site_name" content=":: Haku&#39;s ::">
 <meta property="og:description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-26T09:40:09.878Z">
+<meta property="og:updated_time" content="2017-12-27T00:09:14.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="任务计划与windows服务的集群化">
 <meta name="twitter:description" content="我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。">
@@ -275,6 +275,7 @@
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
+  
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://b.kohaku.cc/2017/12/26/clustered-tasks-and-services/">
 
@@ -335,6 +336,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 本文阅读量 </i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
 
           
 
@@ -362,7 +368,7 @@
 </blockquote>
 <p>详见 <a href="https://blogs.msdn.microsoft.com/clustering/2012/05/31/how-to-configure-clustered-tasks-with-windows-server-2012/" target="_blank" rel="noopener">How to Configure Clustered Tasks with Windows Server 2012</a></p>
 <h3 id="Windows-service集群化"><a href="#Windows-service集群化" class="headerlink" title="Windows service集群化"></a>Windows service集群化</h3><p>Windows Service 不能感知到整个集群，因此Windows Service集群化需要首先在各个节点上安装服务，然后再在故障转移集群管理器中添加服务。</p>
-<p>参考<a href="https://www.1e.com/blogs/2014/11/17/creating-a-windows-cluster-part-5-adding-applications-and-services-to-the-cluster/" target="_blank" rel="noopener">Creating a Windows Cluster: Part 5 – Adding Applications and Services to the Cluster</a></p>
+<p>参考 <a href="https://www.1e.com/blogs/2014/11/17/creating-a-windows-cluster-part-5-adding-applications-and-services-to-the-cluster/" target="_blank" rel="noopener">Creating a Windows Cluster: Part 5 – Adding Applications and Services to the Cluster</a></p>
 
       
     </div>
@@ -406,6 +412,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/08/new-year-2018/" rel="prev" title="new year 2018">
+                new year 2018 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -489,7 +499,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -500,7 +510,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -511,7 +521,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -566,7 +576,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -594,7 +604,19 @@
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
+    <span class="site-uv">
+      <i class="fa fa-user"> 访客数 </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
 
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量 </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
   
 </div>
 

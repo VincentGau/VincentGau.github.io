@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[new year 2018]]></title>
+    <url>%2F2018%2F01%2F08%2Fnew-year-2018%2F</url>
+    <content type="text"><![CDATA[没想到啊没想到，2018年刚刚开始，就被一场重感冒当头一棒，整整一个星期才慢慢缓过来。 回顾2017年，也不知道做了些什么事。读完一遍Stavrianos 的《全球通史》，重读了一次余华的《活着》，读了东野圭吾的畅销书《解忧杂货店》，还有一些看了就像没看一样的。读了一些Django 的源码，入门了Node，假装给开源世界做了一点贡献，花了几天时间给 kohaku.cc 搬家。2017年哪里都没有去…… 惊慌地想要在日记中再找一些风和阳光的蛛丝马迹，聊以慰藉，失望地发现2017年5月某日的上一篇是16年的5月，突然间悲从中来。 2017年，长丑了，都说相由心生。 2018年我的愿望是，变帅！]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[任务计划与windows服务的集群化]]></title>
     <url>%2F2017%2F12%2F26%2Fclustered-tasks-and-services%2F</url>
-    <content type="text"><![CDATA[我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。 任务计划集群化Windows Server 2012 之前，我们可以在集群的节点上部署任务，但是任务计划程序对整个集群是不感知的，手动管理各个节点上的任务计划比较容易出错，尤其是在节点多的情况下，Windows Server 2012 以后，通过Cluster Scheduled Tasks 可以十分简单地通过PowerShell 来管理集群上的任务计划，只需要在任意一个节点上注册任务。比较常用的是AnyNode 模式，任务计划在任意一个节点上启用，在其他节点都处于禁用状态。 对于已存在的任务计划，可以先导出xml，以该文件名作为参数进行任务注册，这样就不用单独配置触发器了：1Register-ClusteredScheduledTask -TaskName MyTask -Cluster MyCluster -Xml $xmlFile 注意： 使用-Xml参数的时候需要保证任务计划用户在各个节点上都存在 详见 How to Configure Clustered Tasks with Windows Server 2012 Windows service集群化Windows Service 不能感知到整个集群，因此Windows Service集群化需要首先在各个节点上安装服务，然后再在故障转移集群管理器中添加服务。 参考Creating a Windows Cluster: Part 5 – Adding Applications and Services to the Cluster]]></content>
+    <content type="text"><![CDATA[我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。 任务计划集群化Windows Server 2012 之前，我们可以在集群的节点上部署任务，但是任务计划程序对整个集群是不感知的，手动管理各个节点上的任务计划比较容易出错，尤其是在节点多的情况下，Windows Server 2012 以后，通过Cluster Scheduled Tasks 可以十分简单地通过PowerShell 来管理集群上的任务计划，只需要在任意一个节点上注册任务。比较常用的是AnyNode 模式，任务计划在任意一个节点上启用，在其他节点都处于禁用状态。 对于已存在的任务计划，可以先导出xml，以该文件名作为参数进行任务注册，这样就不用单独配置触发器了：1Register-ClusteredScheduledTask -TaskName MyTask -Cluster MyCluster -Xml $xmlFile 注意： 使用-Xml参数的时候需要保证任务计划用户在各个节点上都存在 详见 How to Configure Clustered Tasks with Windows Server 2012 Windows service集群化Windows Service 不能感知到整个集群，因此Windows Service集群化需要首先在各个节点上安装服务，然后再在故障转移集群管理器中添加服务。 参考 Creating a Windows Cluster: Part 5 – Adding Applications and Services to the Cluster]]></content>
       <tags>
         <tag>scheduled task</tag>
         <tag>Windows service</tag>
