@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://b.kohaku.cc/about/index.html</loc>
+    
+    <lastmod>2018-01-12T02:19:12.096Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://b.kohaku.cc/2018/01/08/new-year-2018/</loc>
     
-    <lastmod>2018-01-09T08:08:32.542Z</lastmod>
+    <lastmod>2018-01-09T08:10:31.753Z</lastmod>
     
   </url>
   
@@ -82,13 +89,6 @@
     <loc>http://b.kohaku.cc/2014/09/27/no-no-no/</loc>
     
     <lastmod>2017-12-23T05:52:49.308Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://b.kohaku.cc/about/index.html</loc>
-    
-    <lastmod>2017-12-22T03:05:00.413Z</lastmod>
     
   </url>
   
