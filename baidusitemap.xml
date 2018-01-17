@@ -3,14 +3,13 @@
 
 
     
-    
   <url>
     <loc>http://b.kohaku.cc/2018/01/08/new-year-2018/</loc>
-    <lastmod>2018-01-09T08:10:31.753Z</lastmod>
+    <lastmod>2018-01-17T02:57:14.519Z</lastmod>
     <data>
         <display>
         <title>写在2018的开始</title>
-        <pubTime>2018-01-07T16:00:00.000Z</pubTime>
+        <pubTime>2018-01-08T02:56:09.000Z</pubTime>
         
         <tag>不知所云</tag>
          
@@ -22,6 +21,28 @@
     </data>
     </url>
 
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/01/12/django-notes/</loc>
+    <lastmod>2018-01-17T02:25:48.395Z</lastmod>
+    <data>
+        <display>
+        <title>Django</title>
+        <pubTime>2018-01-12T06:59:48.000Z</pubTime>
+        
+        <tag>django</tag>
+         
+        <tag>python</tag>
+         
+        <tag>programming</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://b.kohaku.cc/2017/12/26/clustered-tasks-and-services/</loc>
