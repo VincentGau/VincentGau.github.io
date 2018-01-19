@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[fabric-python命令行工具库]]></title>
+    <title><![CDATA[命令行工具库 fabric]]></title>
     <url>%2F2018%2F01%2F18%2Ffabric%2F</url>
     <content type="text"><![CDATA[fabric 是一个python库（支持python2.5 到2.7 版本），也是一个命令行工具，，它的一个重要的功能是在不登录远程服务器的情况下，在本地执行远程shell命令，上传下载文件等等，这个特性让我们可以通过fabric 来进行应用部署，以及执行一些系统运维自动化的任务。 It provides a basic suite of operations for executing local or remote shell commands (normally or via sudo) and uploading/downloading files, as well as auxiliary functionality such as prompting the running user for input, or aborting execution. 安装安装fabric：激活python2 虚拟环境，pip install fabric 使用SSH keyfabric 提供密码和密钥方式登录远程服务器，为了方便和安全起见，密钥是更好的选择。 生成SSH key首先我们需要在远程服务器生成密钥，在远程执行：$ ssh-keygen在.ssh/ 目录下生成默认rsa算法加密的密钥对（id_rsa 私钥，id_rsa.pub 公钥） 发布公钥密钥生成之后，需要把公钥的内容添加到.ssh 目录下的 _authorizedkeys 文件，1234567$ cd ~/.ssh$ cat id_rsa.pub &gt;&gt; authorized_keys``` 修改权限```bash$ chmod 600 authorized_keys$ chmod 700 ~/.ssh 配置fabric 环境参数将私钥下载到本地，指定fabric 环境配置env.key_filename = &quot;path/to/id_rsa&quot; 示例fabric 提供的API 中，常用的有local() 和run()，分别在本地和远程服务器执行命令。fabric 文件的一个函数对应一个操作。 举一个简单的例子，如需要列出远程服务器”/“下的文件和目录，在本地新建fabfile.py 文件如下： 12345678910#!/usr/bin/python env# -*- coding: utf-8 -*-from fabric.api import *env.hosts=[&apos;username@xxx.xxx.xxx.xxx&apos;]env.key_filename = &quot;id_rsa&quot; # 通过密钥登录远程服务器def hello(): with cd(&apos;/&apos;): # 进入目录 run(&apos;ls -l&apos;) # run() 执行远程操作 列出远程机器上的文件和目录 执行 fab hello 命令列出文件和目录，和在远程服务器上执行一样。 fabfiles 通常放在项目的根目录。 fabric 文档]]></content>
       <tags>
