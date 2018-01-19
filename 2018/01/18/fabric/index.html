@@ -87,7 +87,7 @@
 <meta property="og:site_name" content=":: Haku&#39;s ::">
 <meta property="og:description" content="fabric 是一个python库（支持python2.5 到2.7 版本），也是一个命令行工具，，它的一个重要的功能是在不登录远程服务器的情况下，在本地执行远程shell命令，上传下载文件等等，这个特性让我们可以通过fabric 来进行应用部署，以及执行一些系统运维自动化的任务。  It provides a basic suite of operations for executing loc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-19T02:51:13.263Z">
+<meta property="og:updated_time" content="2018-01-19T03:35:17.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fabric-python命令行工具库">
 <meta name="twitter:description" content="fabric 是一个python库（支持python2.5 到2.7 版本），也是一个命令行工具，，它的一个重要的功能是在不登录远程服务器的情况下，在本地执行远程shell命令，上传下载文件等等，这个特性让我们可以通过fabric 来进行应用部署，以及执行一些系统运维自动化的任务。  It provides a basic suite of operations for executing loc">
@@ -363,6 +363,7 @@
 <blockquote>
 <p>It provides a basic suite of operations for executing local or remote shell commands (normally or via sudo) and uploading/downloading files, as well as auxiliary functionality such as prompting the running user for input, or aborting execution.</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装fabric：激活python2 虚拟环境，pip install fabric</p>
 <h1 id="使用SSH-key"><a href="#使用SSH-key" class="headerlink" title="使用SSH key"></a>使用SSH key</h1><p>fabric 提供密码和密钥方式登录远程服务器，为了方便和安全起见，密钥是更好的选择。</p>
 <h2 id="生成SSH-key"><a href="#生成SSH-key" class="headerlink" title="生成SSH key"></a>生成SSH key</h2><p>首先我们需要在远程服务器生成密钥，在远程执行：<br><code>$ ssh-keygen</code><br>在.ssh/ 目录下生成默认rsa算法加密的密钥对（id_rsa 私钥，id_rsa.pub 公钥）</p>
