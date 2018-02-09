@@ -4,14 +4,18 @@
 
     
   <url>
-    <loc>http://b.kohaku.cc/2018/01/18/fabric/</loc>
-    <lastmod>2018-01-19T03:37:38.376Z</lastmod>
+    <loc>http://b.kohaku.cc/2018/01/12/django-notes/</loc>
+    <lastmod>2018-02-08T09:14:27.679Z</lastmod>
     <data>
         <display>
-        <title>命令行工具库 fabric</title>
-        <pubTime>2018-01-18T09:10:34.000Z</pubTime>
+        <title>Django 笔记</title>
+        <pubTime>2018-01-12T06:59:48.000Z</pubTime>
         
+        <tag>django</tag>
+         
         <tag>python</tag>
+         
+        <tag>programming</tag>
          
          
            
@@ -22,7 +26,7 @@
     
   <url>
     <loc>http://b.kohaku.cc/2018/01/17/go-into-pycharm/</loc>
-    <lastmod>2018-01-19T03:36:17.657Z</lastmod>
+    <lastmod>2018-01-22T07:09:37.973Z</lastmod>
     <data>
         <display>
         <title>Go into PyCharm</title>
@@ -40,18 +44,16 @@
 
     
   <url>
-    <loc>http://b.kohaku.cc/2018/01/12/django-notes/</loc>
-    <lastmod>2018-01-17T06:42:59.037Z</lastmod>
+    <loc>http://b.kohaku.cc/2018/01/18/fabric/</loc>
+    <lastmod>2018-01-19T07:54:48.558Z</lastmod>
     <data>
         <display>
-        <title>Django 笔记</title>
-        <pubTime>2018-01-12T06:59:48.000Z</pubTime>
+        <title>命令行工具库 fabric</title>
+        <pubTime>2018-01-18T09:10:34.000Z</pubTime>
         
-        <tag>django</tag>
-         
         <tag>python</tag>
          
-        <tag>programming</tag>
+        <tag>自动化部署</tag>
          
          
            

@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>:: Haku&#39;s ::</title>
+  
+  <subtitle>生命中幻光 不可追逐</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://b.kohaku.cc/"/>
+  <updated>2018-01-19T07:54:48.558Z</updated>
+  <id>http://b.kohaku.cc/</id>
+  
+  <author>
+    <name>Haku</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>命令行工具库 fabric</title>
+    <link href="http://b.kohaku.cc/2018/01/18/fabric/"/>
+    <id>http://b.kohaku.cc/2018/01/18/fabric/</id>
+    <published>2018-01-18T09:10:34.000Z</published>
+    <updated>2018-01-19T07:54:48.558Z</updated>
+    
+    <content type="html"><![CDATA[<p>fabric 是一个python库（支持python2.5 到2.7 版本），也是一个命令行工具，，它的一个重要的功能是<strong>在不登录远程服务器的情况下，在本地执行远程shell命令，上传下载文件等等</strong>，这个特性让我们可以通过fabric 来进行应用部署，以及执行一些系统运维自动化的任务，而且是可以在多台服务器上执行。</p><blockquote><p>It provides a basic suite of operations for executing local or remote shell commands (normally or via sudo) and uploading/downloading files, as well as auxiliary functionality such as prompting the running user for input, or aborting execution.</p></blockquote><a id="more"></a><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装fabric：激活python2 虚拟环境，pip install fabric</p><h1 id="使用SSH-key"><a href="#使用SSH-key" class="headerlink" title="使用SSH key"></a>使用SSH key</h1><p>fabric 提供密码和密钥方式登录远程服务器，为了方便和安全起见，密钥是更好的选择。</p><h2 id="生成SSH-key"><a href="#生成SSH-key" class="headerlink" title="生成SSH key"></a>生成SSH key</h2><p>首先我们需要在远程服务器生成密钥，在远程执行：<br><code>$ ssh-keygen</code><br>在.ssh/ 目录下生成默认rsa算法加密的密钥对（id_rsa 私钥，id_rsa.pub 公钥）</p><h2 id="发布公钥"><a href="#发布公钥" class="headerlink" title="发布公钥"></a>发布公钥</h2><p>密钥生成之后，需要把公钥的内容添加到.ssh 目录下的 _authorized<em>keys</em> 文件，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ cat id_rsa.pub &gt;&gt; authorized_keys</span><br><span class="line">```  </span><br><span class="line">修改权限</span><br><span class="line">```bash</span><br><span class="line">$ chmod 600 authorized_keys</span><br><span class="line">$ chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure></p><h2 id="配置fabric-环境参数"><a href="#配置fabric-环境参数" class="headerlink" title="配置fabric 环境参数"></a>配置fabric 环境参数</h2><p>将私钥下载到本地，指定fabric 环境配置<br><code>env.key_filename = &quot;path/to/id_rsa&quot;</code></p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>fabric 提供的API 中，常用的有<code>local()</code> 和<code>run()</code>，分别在本地和远程服务器执行命令。fabric 文件的一个函数对应一个操作。 </p><p>举一个简单的例子，如需要列出远程服务器”/“下的文件和目录，在本地新建fabfile.py 文件如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python env</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">from fabric.api import *</span><br><span class="line">env.hosts=[&apos;username@xxx.xxx.xxx.xxx&apos;]</span><br><span class="line">env.key_filename = &quot;id_rsa&quot;   # 通过密钥登录远程服务器</span><br><span class="line"></span><br><span class="line">def hello():</span><br><span class="line">    with cd(&apos;/&apos;):     # 进入目录</span><br><span class="line">        run(&apos;ls -l&apos;)  # run() 执行远程操作 列出远程机器上的文件和目录</span><br></pre></td></tr></table></figure><p>执行 <code>fab hello</code> 命令列出文件和目录，和在远程服务器上执行一样。</p><p>fabfiles 通常放在项目的根目录。</p><p><a href="http://docs.fabfile.org/en/1.14/" target="_blank" rel="noopener">fabric 文档</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;fabric 是一个python库（支持python2.5 到2.7 版本），也是一个命令行工具，，它的一个重要的功能是&lt;strong&gt;在不登录远程服务器的情况下，在本地执行远程shell命令，上传下载文件等等&lt;/strong&gt;，这个特性让我们可以通过fabric 来进行应用部署，以及执行一些系统运维自动化的任务，而且是可以在多台服务器上执行。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It provides a basic suite of operations for executing local or remote shell commands (normally or via sudo) and uploading/downloading files, as well as auxiliary functionality such as prompting the running user for input, or aborting execution.&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
+    
+      <category term="自动化部署" scheme="http://b.kohaku.cc/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go into PyCharm</title>
+    <link href="http://b.kohaku.cc/2018/01/17/go-into-pycharm/"/>
+    <id>http://b.kohaku.cc/2018/01/17/go-into-pycharm/</id>
+    <published>2018-01-17T07:53:01.000Z</published>
+    <updated>2018-01-22T07:09:37.973Z</updated>
+    
+    <content type="html"><![CDATA[<p>开发Python项目首选PyCharm，PyCharm有很多好用的强大的特性，略作记录以备后用。</p><h1 id="Automatic-Upload"><a href="#Automatic-Upload" class="headerlink" title="Automatic Upload"></a>Automatic Upload</h1><p>除了集成Git 等版本控制工具，pycharm 还提供自动上传文件到远程主机，以及调用远程主机解释器的功能。配置好SSH连接到远程主机之后，在本地工作区所做的修改可以被自动同步到远程主机上.</p><a id="more"></a><ul><li>因为安全原因，我在远程主机禁止用户名密码方式，只允许私钥登录，因此需要提前准备Private key 文件以在IDE 中连接远程主机；</li></ul><blockquote><p><strong>PS:</strong> 在远程主机生成的ppk私钥文件不被pycharm 支持，需要通过pyttygen 工具进行转换：打开puttygen.exe， Conversation -&gt; Import 导入已生成的ppk 私钥文件，密码可选，然后 Conversation -&gt; Export OpenSSH Key 导出备用。</p></blockquote><ul><li>PyCharm菜单栏进入Tools -&gt; Deployment -&gt; Configuration，新增配置，类型选择SFTP，配置远程主机及端口，选择验证方式为Key Pair，私钥文件选择上一步骤导出的文件，测试SFTP 连接是否成功。</li></ul><img src="/2018/01/17/go-into-pycharm/deployment_config.png"><ul><li>在Mapping 标签页填上本地路径和远程主机发布路径。</li><li>远程主机配置完成之后可以继续在Deployment 下的Options 选项中做一些个性化的配置，比如排除哪些文件，是否自动上传等。</li></ul><h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><p>PyCharm 和其他jetBrain 的IDE 都有TODO 功能，迅速定位注释中出现TODO 关键字的位置，帮助我们快速回到上次工作遗留的地方。  </p><img src="/2018/01/17/go-into-pycharm/todo.png"><p>TODO 窗口包含四个标签页，显示不同范围的TODO。 此外，TODO 功能还支持自定义模板。</p><p><a href="https://www.jetbrains.com/help/pycharm/using-todo.html" target="_blank" rel="noopener">More about TODO</a></p><p><a href="https://www.jetbrains.com/help/pycharm/meet-pycharm.html" target="_blank" rel="noopener">PyCharm 帮助文档</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;开发Python项目首选PyCharm，PyCharm有很多好用的强大的特性，略作记录以备后用。&lt;/p&gt;
+&lt;h1 id=&quot;Automatic-Upload&quot;&gt;&lt;a href=&quot;#Automatic-Upload&quot; class=&quot;headerlink&quot; title=&quot;Automatic Upload&quot;&gt;&lt;/a&gt;Automatic Upload&lt;/h1&gt;&lt;p&gt;除了集成Git 等版本控制工具，pycharm 还提供自动上传文件到远程主机，以及调用远程主机解释器的功能。配置好SSH连接到远程主机之后，在本地工作区所做的修改可以被自动同步到远程主机上.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
+    
+      <category term="pycharm" scheme="http://b.kohaku.cc/tags/pycharm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Django 笔记</title>
+    <link href="http://b.kohaku.cc/2018/01/12/django-notes/"/>
+    <id>http://b.kohaku.cc/2018/01/12/django-notes/</id>
+    <published>2018-01-12T06:59:48.000Z</published>
+    <updated>2018-02-08T09:14:27.679Z</updated>
+    
+    <content type="html"><![CDATA[<p>Django是一个用python写的轻量级Web框架，虽说是轻量级，但是它能做的事情并不少，有了Django我们就可以用很少的代码来搭建一个现代化的网站，避免重复造轮子。Django2.0之后已经放弃了对python2 的支持，只支持python3.4 及以上版本。</p><p>Django框架包含了一个完整Web应用各方面的知识点，下面对Django一些常用的特性做一个梳理，旨在学习Django的架构和源码。</p><a id="more"></a><h1 id="URL-Route"><a href="#URL-Route" class="headerlink" title="URL Route"></a>URL Route</h1><h2 id="路由规则"><a href="#路由规则" class="headerlink" title="路由规则"></a>路由规则</h2><p>Django项目的路由规则写在一系列urls.py文件里，包括项目的urls.py和各个app的urls.py。当一个请求到来，在展示最终页面之前需要经过以下步骤：</p><ul><li>首先确定根URLconf，通常这个值在settings.py 中设置。但是如果传入的HttpRequest对象有urlconf属性，那么它将会作为当前请求的根URLconf，代替settings中的ROOT_URLCONF；</li><li>Django加载该URLconf 模块，找到urlpatterns变量；</li><li>Django<strong>依次</strong>匹配每一个url pattern，在第一个匹配所请求URL的pattern处停下来，因此pattern 的顺序是有影响的；</li><li>一旦一个URL pattern匹配成功，Django 会调用对应的视图，视图接收以下参数：<ul><li>一个HTTPRequest 实例;</li><li>如果匹配的URL pattern没有返回命名组，正则表达式匹配的内容将会作为positional parameters 提供给视图;</li><li>关键字参数由正则表达式匹配的命名组组成，可以被可选参数覆盖；</li></ul></li><li>如果没有匹配到任何URL pattern，或者在匹配过程中抛出了异常，Django会调用一个对应的错误处理视图，比如400，500等；</li></ul><blockquote><p>Django2.0 已经不在路由规则中使用符号 <code>^</code>、 <code>$</code> ，并且将<code>url</code>函数改成<code>path</code>函数。</p></blockquote><h3 id="传递额外的参数给视图"><a href="#传递额外的参数给视图" class="headerlink" title="传递额外的参数给视图"></a>传递额外的参数给视图</h3><p>URLconf提供了一个hook，允许以python dictionary的形式传递额外的参数给视图函数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'blog/&lt;int:year&gt;/'</span>, views.year_archive, &#123;<span class="string">'foo'</span>: <span class="string">'bar'</span>&#125;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p><p>上例中，如果请求<code>/blog/2018/</code>，Django会调用 <code>views.year_archive(request, year=2018, foo=&#39;bar&#39;)</code></p><h2 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h2><p>在生产环境我们通常会使用单独的server来提供对静态文件的访问，Django提供了一个static()方法在调试的时候serve静态文件。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># ... the rest of your URLconf goes here ...</span></span><br><span class="line">] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</span><br></pre></td></tr></table></figure></p><h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><p>Django已经包含了ORM，因此只需要关注Model类，而不用关心SQL。前提是要在INSTALLED_APPS 中包含指定的app。</p><blockquote><p><em>Tips：</em>如果使用PyCharm 的话，通过Ctrl + Alt + R 调出python manage.py 命令界面，可以直接执行migrate，shell 等命令，不用在python 命令行执行.</p></blockquote><h1 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h1><p>Django 里的Middleware 可以看成是一个hook，处于request/response 过程之间，是一个轻量级的、底层的插件系统，用于改变Django 的输入输出。</p><p>一个middleware factory 是一个callable，它接收一个get_response<br> callable作为参数，返回一个middleware；一个middleware 是一个callable，它像view一样，接收一个request， 返回一个response。返回真正的view 之前可能经历数个中间件：在响应阶段，调用视图之前，Django按顺序从上到下应用MIDDLEWARE中定义的中间件。可以把这个结构看成一个洋葱，洋葱的中心是最后展示的view，它被一层层的中间件包裹起来，每一层都调用get_response把request 传递到下一层，直到view，然后response也会按原路返回直到最外层的中间件。 在request 和response 之间想要做的事情，都可以用middleware 来实现。</p><h1 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h1><p>Django 的Authentication 系统处理用户组和账户，用户许可和基于cookie的session，实际上它包含Authentication 和Authorization 两部分，前者负责确认用户的身份，后者决定一个认证用户可以做的事情。</p><h2 id="自定义User模型"><a href="#自定义User模型" class="headerlink" title="自定义User模型"></a>自定义User模型</h2><p>User 对象是认证系统的核心，Django提供了默认的User模型，但是还是推荐使用自定义的user 模型，在将来提供更好的扩展性。</p><blockquote><p>If you’re starting a new project, it’s highly recommended to set up a custom user model, even if the default User model is sufficient for you. This model behaves identically to the default user model, but you’ll be able to customize it in the future if the need arises.</p></blockquote><p>使用自定义的User模型之前需要三个步骤：  </p><ul><li><p>继承AbstractUser 类：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(AbstractUser)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></li><li><p>settings.py 中指定 AUTH_USER_MODEL = ‘appname.User’</p></li><li>在app 的admin.py中注册User模型：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.admin <span class="keyword">import</span> UserAdmin</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line">admin.site.register(User, UserAdmin)</span><br></pre></td></tr></table></figure></li></ul><h2 id="Authentication-Views"><a href="#Authentication-Views" class="headerlink" title="Authentication Views"></a>Authentication Views</h2><p>Django 提供了一些默认视图（Authentication Views）处理登录，注销和修改密码操作，可以直接拿来用。如果需要更多个性化的处理，不想使用内置的视图，在项目中新建一个app来处理这些用户操作。</p><h2 id="buit-in-forms"><a href="#buit-in-forms" class="headerlink" title="buit-in forms"></a>buit-in forms</h2><p>如果不想使用内置的视图，但又不想自己写各种表单，authentication 系统提供了一些内置的form。</p><h1 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h1><p>TDD 是敏捷开发的一个核心实践，通过测试来推动开发的进行，不写测试用例节省的时间有可能在将来付出成倍的代价。自动化测试可以发现迭代过程中对已有功能的不可预期的影响，及时解决问题。</p><p>Django 的单元测试使用Python的标准库unittest，通过class-based 的方法定义测试用例，执行测试的时候会检查所有以test 开头的文件。</p><h2 id="测试提速"><a href="#测试提速" class="headerlink" title="测试提速"></a>测试提速</h2><h3 id="测试并行"><a href="#测试并行" class="headerlink" title="测试并行"></a>测试并行</h3><p>如果测试用例相互独立，可以并行执行测试以提升效率。<code>test --parallel</code></p><h3 id="保留测试数据库"><a href="#保留测试数据库" class="headerlink" title="保留测试数据库"></a>保留测试数据库</h3><p>保留上一次运行测试创建的册数数据库，节省创建和销毁操作，大大减少运行测试的时间。<code>test --keepdb</code></p><h3 id="密码哈希"><a href="#密码哈希" class="headerlink" title="密码哈希"></a>密码哈希</h3><p>默认的密码哈希算法相当耗时，如果需要在测试用例中大量认证用户，可以自定义hash 算法，在settings.py中设置PASSWORD_HASHERS；</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Django是一个用python写的轻量级Web框架，虽说是轻量级，但是它能做的事情并不少，有了Django我们就可以用很少的代码来搭建一个现代化的网站，避免重复造轮子。Django2.0之后已经放弃了对python2 的支持，只支持python3.4 及以上版本。&lt;/p&gt;
+&lt;p&gt;Django框架包含了一个完整Web应用各方面的知识点，下面对Django一些常用的特性做一个梳理，旨在学习Django的架构和源码。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="django" scheme="http://b.kohaku.cc/tags/django/"/>
+    
+      <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
+    
+      <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>写在2018的开始</title>
+    <link href="http://b.kohaku.cc/2018/01/08/new-year-2018/"/>
+    <id>http://b.kohaku.cc/2018/01/08/new-year-2018/</id>
+    <published>2018-01-08T02:56:09.000Z</published>
+    <updated>2018-01-17T02:57:14.519Z</updated>
+    
+    <content type="html"><![CDATA[<p>没想到啊没想到，2018年刚刚开始，就被一场重感冒当头一棒，整整一个星期才慢慢缓过来。</p><p>回顾2017年，也不知道做了些什么事。读完一遍Stavrianos 的《全球通史》，重读了一次余华的《活着》，读了东野圭吾的畅销书《解忧杂货店》，还有一些看了就像没看一样的。读了一些Django 的源码，入门了Node，假装给开源世界做了一点贡献，花了两天时间给kohaku.cc 搬家。2017年哪里都没有去……</p><p>惊慌地想要在日记中再找一些风和阳光的蛛丝马迹，聊以慰藉，失望地发现2017年5月某日的上一篇是16年的5月，突然间悲从中来。</p><p>2017年，我没有在世界上留下痕迹，岁月却在我身上留下痕迹，长丑了，都说相由心生。</p><p>那么2018年，我有一个愿望，就是变帅！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;没想到啊没想到，2018年刚刚开始，就被一场重感冒当头一棒，整整一个星期才慢慢缓过来。&lt;/p&gt;
+&lt;p&gt;回顾2017年，也不知道做了些什么事。读完一遍Stavrianos 的《全球通史》，重读了一次余华的《活着》，读了东野圭吾的畅销书《解忧杂货店》，还有一些看了就像没看一样的
+      
+    
+    </summary>
+    
+    
+      <category term="不知所云" scheme="http://b.kohaku.cc/tags/%E4%B8%8D%E7%9F%A5%E6%89%80%E4%BA%91/"/>
+    
+      <category term="2018" scheme="http://b.kohaku.cc/tags/2018/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>任务计划与windows服务的集群化</title>
+    <link href="http://b.kohaku.cc/2017/12/26/clustered-tasks-and-services/"/>
+    <id>http://b.kohaku.cc/2017/12/26/clustered-tasks-and-services/</id>
+    <published>2017-12-26T09:30:53.000Z</published>
+    <updated>2017-12-27T00:09:14.099Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。</p><a id="more"></a><h3 id="任务计划集群化"><a href="#任务计划集群化" class="headerlink" title="任务计划集群化"></a>任务计划集群化</h3><p>Windows Server 2012 之前，我们可以在集群的节点上部署任务，但是任务计划程序对整个集群是不感知的，手动管理各个节点上的任务计划比较容易出错，尤其是在节点多的情况下，Windows Server 2012 以后，通过Cluster Scheduled Tasks 可以十分简单地通过PowerShell 来管理集群上的任务计划，只需要在任意一个节点上注册任务。比较常用的是AnyNode 模式，任务计划在任意一个节点上启用，在其他节点都处于禁用状态。</p><p>对于已存在的任务计划，可以先导出xml，以该文件名作为参数进行任务注册，这样就不用单独配置触发器了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Register-ClusteredScheduledTask -TaskName MyTask -Cluster MyCluster -Xml <span class="variable">$xmlFile</span></span><br></pre></td></tr></table></figure></p><blockquote><p>注意： 使用-Xml参数的时候需要保证任务计划用户在各个节点上都存在</p></blockquote><p>详见 <a href="https://blogs.msdn.microsoft.com/clustering/2012/05/31/how-to-configure-clustered-tasks-with-windows-server-2012/" target="_blank" rel="noopener">How to Configure Clustered Tasks with Windows Server 2012</a></p><h3 id="Windows-service集群化"><a href="#Windows-service集群化" class="headerlink" title="Windows service集群化"></a>Windows service集群化</h3><p>Windows Service 不能感知到整个集群，因此Windows Service集群化需要首先在各个节点上安装服务，然后再在故障转移集群管理器中添加服务。</p><p>参考 <a href="https://www.1e.com/blogs/2014/11/17/creating-a-windows-cluster-part-5-adding-applications-and-services-to-the-cluster/" target="_blank" rel="noopener">Creating a Windows Cluster: Part 5 – Adding Applications and Services to the Cluster</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们常常会使用任务计划定时执行一些日常任务，若需要程序长时间执行又不需要用户登录，可能还会用到Windows Service，一般情况单台服务器就能满足要求，但对一些要求比较高的任务可能需要集群化来保证高可用性。在故障转移集群上实现任务计划的集群化和Windows Service的集群化有一些差异。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="scheduled task" scheme="http://b.kohaku.cc/tags/scheduled-task/"/>
+    
+      <category term="Windows service" scheme="http://b.kohaku.cc/tags/Windows-service/"/>
+    
+      <category term="clustered" scheme="http://b.kohaku.cc/tags/clustered/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搬家啦~</title>
+    <link href="http://b.kohaku.cc/2017/12/23/move-to-hexo/"/>
+    <id>http://b.kohaku.cc/2017/12/23/move-to-hexo/</id>
+    <published>2017-12-23T07:39:03.000Z</published>
+    <updated>2017-12-23T11:10:22.406Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>君子生非异也，善假于物也</p></blockquote><p>之前对 <code>python</code> 兴趣正浓的时候用 <code>django</code> 写过一个博客，一边写一边读源码，颇有收获，奈何缺少艺术天分，不懂设计，没有风格，难看得很，一开始写点东西的欲望逐渐消磨，小站也渐渐疏于维护。</p><p>偶然发现朋友用hexo 搭的博客，简洁明了，于是萌生了重新梳理博客的想法，纠结于用hexo 搭一个和重写原来的博客之间，最后还是选择 <a href="https://hexo.io/" target="_blank" rel="noopener">hexo</a>，发现竟意外地好用，于是就有了现在的模样。原来的 kohaku.cc 暂时运行在另一个次元，将来可能以新的面目出现。</p><a id="more"></a><p>最近的日记本写到最后一页，又懒得去买新本子，就这么空了几个月。今后将在此不定期更新，记录一些或好或坏心情，以及其他…… </p><img src="/2017/12/23/move-to-hexo/old-man.jpg">]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;君子生非异也，善假于物也&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;之前对 &lt;code&gt;python&lt;/code&gt; 兴趣正浓的时候用 &lt;code&gt;django&lt;/code&gt; 写过一个博客，一边写一边读源码，颇有收获，奈何缺少艺术天分，不懂设计，没有风格，难看得很，一开始写点东西的欲望逐渐消磨，小站也渐渐疏于维护。&lt;/p&gt;
+&lt;p&gt;偶然发现朋友用hexo 搭的博客，简洁明了，于是萌生了重新梳理博客的想法，纠结于用hexo 搭一个和重写原来的博客之间，最后还是选择 &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;hexo&lt;/a&gt;，发现竟意外地好用，于是就有了现在的模样。原来的 kohaku.cc 暂时运行在另一个次元，将来可能以新的面目出现。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="hexo" scheme="http://b.kohaku.cc/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 弱引用</title>
+    <link href="http://b.kohaku.cc/2017/05/23/python-weakref/"/>
+    <id>http://b.kohaku.cc/2017/05/23/python-weakref/</id>
+    <published>2017-05-23T01:35:34.000Z</published>
+    <updated>2017-12-23T05:53:22.694Z</updated>
+    
+    <content type="html"><![CDATA[<p>Python 的 <code><a href="https://docs.python.org/2/library/weakref.html" target="_blank" rel="noopener">weakref</a></code> 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁。但是有时候我们希望在内存需要的时候更早地销毁一个对象，比如发生循环引用时，或者在建立一个对象缓存时；弱引用不能保证对象不被销毁，当一个对象只存在弱引用时，它也会被销毁。</p><a id="more"></a><p>弱引用的一个基本用法就是实现缓存和大对象映射，使一个大对象不会因为存在于缓存或者一个键值对中而逃避被销毁。例如，我们有一些大的二进制图片对象，现在打算把他们和名称一一对应，如果使用 Python 的 <code>dictionary</code> 将名称映射到图片对象（或者反过来），图片对象会一直存在于内存中，因为它们依然作为字典的值（或者键）存在，弱引用可以解决这个问题，使用基于<code>weakref</code>模块实现的 <code>WeakKeyDictionary</code> 和 <code>WeakValueDictionary</code> ,用弱引用来构造映射关系，我们假设图片对象是 <code>WeakValueDictionary</code> 的值，当该对象的引用只是 weak mapping 中的弱引用时，GC会回收该对象，weak mapping 中对应的条目也会被删除；一些内建类型比如 <code>list</code>， <code>dict</code> 不直接支持弱引用，但可以通过子类增加弱引用支持；对对象的弱引用不会增加其引用计数，见下面代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> weakref</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line">b = a</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 3</span></span><br><span class="line"></span><br><span class="line">c = weakref.ref(a)</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 3</span></span><br><span class="line"><span class="keyword">print</span> weakref.getweakrefcount(a)    <span class="comment"># 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> b</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> c</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"><span class="keyword">print</span> weakref.getweakrefcount(a)    <span class="comment"># 0</span></span><br></pre></td></tr></table></figure><p>从上面的例子可以看到，对对象的弱引用使用单独的计数器；之所以第一次获取引用计数结果是 <code>2</code>而不是 <code>1</code>，是因为把 <code>a</code> 当参数传入了 <code>getrefcount()</code> 方法。</p><p>总结，弱引用主要解决垃圾回收的问题，多用在处理对象缓存和循环引用问题上；回顾一下弱引用在 <code>django</code> 中使用的场景，<code>Signal</code> 类初始化的时候就定义了一个 <code>receiver</code> 缓存，在连接<code>receiver</code> 和信号的时候，默认对 <code>receiver</code> 使用弱引用；<code>weakref</code> 模块的方法和属性详见 <a href="https://docs.python.org/2/library/weakref.html" target="_blank" rel="noopener">weakref</a></p><p>相关文档：<a href="https://pymotw.com/2/weakref/index.html" target="_blank" rel="noopener">https://pymotw.com/2/weakref/index.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Python 的 &lt;code&gt;&lt;a href=&quot;https://docs.python.org/2/library/weakref.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;weakref&lt;/a&gt;&lt;/code&gt; 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁。但是有时候我们希望在内存需要的时候更早地销毁一个对象，比如发生循环引用时，或者在建立一个对象缓存时；弱引用不能保证对象不被销毁，当一个对象只存在弱引用时，它也会被销毁。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="http://b.kohaku.cc/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://b.kohaku.cc/tags/Python/"/>
+    
+      <category term="Weakref" scheme="http://b.kohaku.cc/tags/Weakref/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>No no no</title>
+    <link href="http://b.kohaku.cc/2014/09/27/no-no-no/"/>
+    <id>http://b.kohaku.cc/2014/09/27/no-no-no/</id>
+    <published>2014-09-27T04:18:47.000Z</published>
+    <updated>2017-12-23T05:52:49.308Z</updated>
+    
+    <content type="html"><![CDATA[<p>Don’t anybody come</p><p>惊扰我的幻光</p><a id="more"></a><p>当我需要在这个时间掏出钥匙</p><p>这扇门 就是一道梦幻的分隔</p><p>窗台上的植物 </p><p>分明一动不动</p><p>又分明在变化</p><p>像靠在墙角的脑袋圆圆的娃娃</p><p>恍恍惚惚</p><p>置身于幻光</p><p>在心里生出一道意识</p><p>别碰它 一碰就碎</p><p>我也像那盆花</p><p>一动也不动</p><p>我们都小心翼翼啊</p><p>假装不得动弹</p><p>Don’t anybody come</p><p>惊扰我的幻光</p><p>只看着它</p><p>渐变昏黄</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Don’t anybody come&lt;/p&gt;
+&lt;p&gt;惊扰我的幻光&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="不知所云" scheme="http://b.kohaku.cc/tags/%E4%B8%8D%E7%9F%A5%E6%89%80%E4%BA%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>毕业季的阳光</title>
+    <link href="http://b.kohaku.cc/2012/05/31/sunshine-in-graduation-season/"/>
+    <id>http://b.kohaku.cc/2012/05/31/sunshine-in-graduation-season/</id>
+    <published>2012-05-31T06:36:01.000Z</published>
+    <updated>2017-12-23T05:53:38.756Z</updated>
+    
+    <content type="html"><![CDATA[<p>走进西侧门的时候<br>阳光正烈<br>后背已经被书包捂出汗</p><a id="more"></a><p>去食堂的小道上没几个人影<br>才意识到<br>只有我们这样的大四众<br>才能随时享受食堂满是空座的待遇<br>现在距离下课还有一刻钟的时间<br>到处都是空座位<br>巴巴地站在桌旁看别人吃东西的情形不会再出现<br>到我吃完离开的时候<br>来食堂的人才多了起来</p><p>我需要找个安静的地方修改论文<br>去图书馆得拿卡<br>信息楼又好像比三教远那么一点</p><p>这次靠近三教 有点微妙异样<br>它好像有强大的压力隔绝外界所有<br>在走近三教的过程中<br>我感觉不到有一丝声音出现在我耳中 一个人与我擦身而过<br>这时候的三教 是一头睡着的庞然大物<br>迎面走来的刚从教室出来的学弟学妹边走边讨论着什么<br>我只看到他们嘴唇在动</p><p>四年前刚来的时候<br>看三五成群的人谈笑着与我擦身而过<br>我在世界之外<br>四年后要离开的时候<br>看三五成群的人谈笑着与我擦身而过<br>我在世界之外<br>始点与终点之间 似乎没那么遥远</p><p>我继续我的行走 没有回头<br>不知道他们会不会回头<br>指着对同伴笑说：你看，那个人是不是很像一只狗……</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;走进西侧门的时候&lt;br&gt;阳光正烈&lt;br&gt;后背已经被书包捂出汗&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="大学" scheme="http://b.kohaku.cc/tags/%E5%A4%A7%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>狗</title>
+    <link href="http://b.kohaku.cc/2011/10/05/dog/"/>
+    <id>http://b.kohaku.cc/2011/10/05/dog/</id>
+    <published>2011-10-04T16:44:10.000Z</published>
+    <updated>2017-12-23T05:53:22.628Z</updated>
+    
+    <content type="html"><![CDATA[<p>傍晚</p><p>马路上遛狗的人不少</p><p>狗永远走在前面</p><p>也远比人活力</p><a id="more"></a><p>偶尔一人一狗迎面碰到另一人一狗</p><p>两狗相互狂吠</p><p>不知是示好还是示恶</p><p>或者只是打招呼</p><p>结果一般都是  稍停一秒  然后错过</p><p>姑且对两狗表示一下同情</p><p>它们却很安然</p><p>绳索困住自由似乎已经被接受</p><p>它们继续晃晃悠悠地行进</p><p>就像根本没有什么  同类</p><p>就在刚刚与自己擦身而过</p><p>我看着这只大黑狗</p><p>在错过两只小白狗之后快乐的前进</p><p>不要想太多</p><p>或许它调戏的目的已经达到</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;傍晚&lt;/p&gt;
+&lt;p&gt;马路上遛狗的人不少&lt;/p&gt;
+&lt;p&gt;狗永远走在前面&lt;/p&gt;
+&lt;p&gt;也远比人活力&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="不知所云" scheme="http://b.kohaku.cc/tags/%E4%B8%8D%E7%9F%A5%E6%89%80%E4%BA%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>老房子</title>
+    <link href="http://b.kohaku.cc/2010/11/20/the-old-house/"/>
+    <id>http://b.kohaku.cc/2010/11/20/the-old-house/</id>
+    <published>2010-11-19T19:02:55.000Z</published>
+    <updated>2017-12-23T06:33:22.844Z</updated>
+    
+    <content type="html"><![CDATA[<p>我有一间老房子</p><p>住着黄昏的破屋与大河 烟囱和桥梁</p><a id="more"></a><p>飘雪的夜晚里 紫色的长阶梯</p><p>半开着门的旧楼房</p><p>水泥路边独树一帜的木屋</p><p>被斑驳阳光装饰的铁门 闪烁着的叶的影子</p><p>如丝细雨 荒凉山路</p><p>夏天静谧的小镇 没有声音 也没有风</p><p>到了尽头的巷子 名叫胡蝶梦</p><p>耀眼的阳光 融化了一圈树叶和白云</p><p>日历上摆动的老时钟 嗒嗒嗒 凝望着</p><p>窗户下安静看书的小娃娃</p><p>枝桠上独舞的红丝带</p><p>阴沉的乌云 肃杀的古堡</p><p>烫金的晚霞 利剑般的高楼大厦</p><p>沧海明月 两处天涯</p><p>我有一间老房子</p><p>名字 叫《遗忘》</p><p>住着黄昏的破屋与大河 烟囱和桥梁</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我有一间老房子&lt;/p&gt;
+&lt;p&gt;住着黄昏的破屋与大河 烟囱和桥梁&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="年少荒唐" scheme="http://b.kohaku.cc/tags/%E5%B9%B4%E5%B0%91%E8%8D%92%E5%94%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>生命中太多的幻光 不能追逐</title>
+    <link href="http://b.kohaku.cc/2010/09/27/pursuit-of-light/"/>
+    <id>http://b.kohaku.cc/2010/09/27/pursuit-of-light/</id>
+    <published>2010-09-27T03:13:22.000Z</published>
+    <updated>2017-12-23T05:53:22.744Z</updated>
+    
+    <content type="html"><![CDATA[<p>.<br><br><br><br><br><a id="more"></a></p><p><br><br><br><br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;.&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="年少荒唐" scheme="http://b.kohaku.cc/tags/%E5%B9%B4%E5%B0%91%E8%8D%92%E5%94%90/"/>
+    
+      <category term="幻光" scheme="http://b.kohaku.cc/tags/%E5%B9%BB%E5%85%89/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>久石让</title>
+    <link href="http://b.kohaku.cc/2010/01/09/joe-hisaishi/"/>
+    <id>http://b.kohaku.cc/2010/01/09/joe-hisaishi/</id>
+    <published>2010-01-09T05:26:23.000Z</published>
+    <updated>2017-12-23T05:53:22.718Z</updated>
+    
+    <content type="html"><![CDATA[<p>久石让</p><p>你的音乐来自哪里</p><p>……</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;久石让&lt;/p&gt;
+&lt;p&gt;你的音乐来自哪里&lt;/p&gt;
+&lt;p&gt;……&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="年少荒唐" scheme="http://b.kohaku.cc/tags/%E5%B9%B4%E5%B0%91%E8%8D%92%E5%94%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cymm wxsm</title>
+    <link href="http://b.kohaku.cc/2009/07/24/cymm-wxsm/"/>
+    <id>http://b.kohaku.cc/2009/07/24/cymm-wxsm/</id>
+    <published>2009-07-23T17:07:48.000Z</published>
+    <updated>2017-12-23T05:53:22.602Z</updated>
+    
+    <content type="html"><![CDATA[<p>不是睡不着</p><p>是电池还没有耗尽</p><p>好久沒遇上下雨了</p><p>這兩天卻都在下雨</p><p>狂暴地下</p><p>明明還沒到該天黑的時候</p><p>天黑了</p><p>只隐约知道外头在下雨</p><p>等我再次回過神來</p><p>只有清涼的風和一地的積水</p><p>天又亮了</p><a id="more"></a><p>其實一直在天上</p><p>只是沒有落下來</p><p>下雨之前</p><p>既悶又熱</p><p>下過雨之後</p><p>涼爽了許多</p><p>踩著被積水包圍的已經干了的地方向外走</p><p>涼風突然吹在身上</p><p>不由自主地摩擦雙臂</p><p>短暫的刺激過後</p><p>我放下雙手</p><p>開始享受夏天難得的涼風</p><p>就算不是太陽</p><p>有這風</p><p>也能讓人十分舒服的</p><p>虧得下雨了</p><p>不然</p><p>還真忘記了夏天也不都是豔陽高照的</p><p>呵呵……</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不是睡不着&lt;/p&gt;
+&lt;p&gt;是电池还没有耗尽&lt;/p&gt;
+&lt;p&gt;好久沒遇上下雨了&lt;/p&gt;
+&lt;p&gt;這兩天卻都在下雨&lt;/p&gt;
+&lt;p&gt;狂暴地下&lt;/p&gt;
+&lt;p&gt;明明還沒到該天黑的時候&lt;/p&gt;
+&lt;p&gt;天黑了&lt;/p&gt;
+&lt;p&gt;只隐约知道外头在下雨&lt;/p&gt;
+&lt;p&gt;等我再次回過神來&lt;/p&gt;
+&lt;p&gt;只有清涼的風和一地的積水&lt;/p&gt;
+&lt;p&gt;天又亮了&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="年少荒唐" scheme="http://b.kohaku.cc/tags/%E5%B9%B4%E5%B0%91%E8%8D%92%E5%94%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>夏天的味道</title>
+    <link href="http://b.kohaku.cc/2009/04/13/scent-of-summer/"/>
+    <id>http://b.kohaku.cc/2009/04/13/scent-of-summer/</id>
+    <published>2009-04-13T09:16:34.000Z</published>
+    <updated>2017-12-23T05:53:22.645Z</updated>
+    
+    <content type="html"><![CDATA[<p>我到图书馆的时候，刚过正午，那里人还不多，屋里很亮，很安静。</p><p>看书看了没多久，我也趴桌子上了…… 迷迷糊糊中，仿佛听到风扇转动的声音。睁眼，没有发现风扇，却让我突然之间闻到了夏天的味道…… </p><a id="more"></a><p>“中午，刚吃完饭，大家都趴在桌子上，没有人说话——大家都睡着了。窗外，树上的的树叶在晃动，却听不见它们发出的声响，耳边传来风扇搅动的声音，夹杂着笔尖划过纸面的沙沙声，偶尔传来的一两句低语，并没有显得格格不入，所有的声音都是那么孤独，这时候，天上飘过一朵云，原本明亮的房间突然暗了下来，而后又缓缓变亮……躁动在安详中消亡。” </p><p>艳阳，暖风，还有永远都飞不尽的飞絮……</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我到图书馆的时候，刚过正午，那里人还不多，屋里很亮，很安静。&lt;/p&gt;
+&lt;p&gt;看书看了没多久，我也趴桌子上了…… 迷迷糊糊中，仿佛听到风扇转动的声音。睁眼，没有发现风扇，却让我突然之间闻到了夏天的味道…… &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
+    
+    
+      <category term="年少荒唐" scheme="http://b.kohaku.cc/tags/%E5%B9%B4%E5%B0%91%E8%8D%92%E5%94%90/"/>
+    
+  </entry>
+  
+</feed>
