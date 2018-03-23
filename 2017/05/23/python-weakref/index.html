@@ -89,7 +89,7 @@
 <meta property="og:site_name" content=":: Haku&#39;s ::">
 <meta property="og:description" content="Python 的 weakref 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁。但是有时候我们希望在内存需要的时候更早地销毁一个对象，比如发生循环引用时，或者在建立一个对象缓存时；弱引用不能保证对">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-23T05:53:22.694Z">
+<meta property="og:updated_time" content="2018-03-13T01:16:18.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 弱引用">
 <meta name="twitter:description" content="Python 的 weakref 模块实现对对象的弱引用（Weak References）。我们知道，Python 的垃圾回收机制基于引用计数器实现，实例创建后将由引用计数器管理，对实例的每一次引用都会使其引用计数器加1，引用的删除使引用计数器减1，如果引用计数器到达0实例将被销毁。但是有时候我们希望在内存需要的时候更早地销毁一个对象，比如发生循环引用时，或者在建立一个对象缓存时；弱引用不能保证对">
@@ -388,7 +388,7 @@
 <p>弱引用的一个基本用法就是实现缓存和大对象映射，使一个大对象不会因为存在于缓存或者一个键值对中而逃避被销毁。例如，我们有一些大的二进制图片对象，现在打算把他们和名称一一对应，如果使用 Python 的 <code>dictionary</code> 将名称映射到图片对象（或者反过来），图片对象会一直存在于内存中，因为它们依然作为字典的值（或者键）存在，弱引用可以解决这个问题，使用基于<code>weakref</code>模块实现的 <code>WeakKeyDictionary</code> 和 <code>WeakValueDictionary</code> ,用弱引用来构造映射关系，我们假设图片对象是 <code>WeakValueDictionary</code> 的值，当该对象的引用只是 weak mapping 中的弱引用时，GC会回收该对象，weak mapping 中对应的条目也会被删除；一些内建类型比如 <code>list</code>， <code>dict</code> 不直接支持弱引用，但可以通过子类增加弱引用支持；对对象的弱引用不会增加其引用计数，见下面代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> weakref</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line">b = a</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 3</span></span><br><span class="line"></span><br><span class="line">c = weakref.ref(a)</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 3</span></span><br><span class="line"><span class="keyword">print</span> weakref.getweakrefcount(a)    <span class="comment"># 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> b</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> c</span><br><span class="line"><span class="keyword">print</span> sys.getrefcount(a)            <span class="comment"># 2</span></span><br><span class="line"><span class="keyword">print</span> weakref.getweakrefcount(a)    <span class="comment"># 0</span></span><br></pre></td></tr></table></figure>
 <p>从上面的例子可以看到，对对象的弱引用使用单独的计数器；之所以第一次获取引用计数结果是 <code>2</code>而不是 <code>1</code>，是因为把 <code>a</code> 当参数传入了 <code>getrefcount()</code> 方法。</p>
-<p>总结，弱引用主要解决垃圾回收的问题，多用在处理对象缓存和循环引用问题上；回顾一下弱引用在 <code>django</code> 中使用的场景，<code>Signal</code> 类初始化的时候就定义了一个 <code>receiver</code> 缓存，在连接<code>receiver</code> 和信号的时候，默认对 <code>receiver</code> 使用弱引用；<code>weakref</code> 模块的方法和属性详见 <a href="https://docs.python.org/2/library/weakref.html" target="_blank" rel="noopener">weakref</a></p>
+<p>总结，弱引用主要解决垃圾回收的问题，多用在处理对象缓存和循环引用问题上；回顾一下弱引用在 <code>django</code> 中的一个使用场景，<code>Signal</code> 类初始化的时候就定义了一个 <code>receiver</code> 缓存，在连接<code>receiver</code> 和信号的时候，默认对 <code>receiver</code> 使用弱引用；<code>weakref</code> 模块的方法和属性详见 <a href="https://docs.python.org/2/library/weakref.html" target="_blank" rel="noopener">weakref</a></p>
 <p>相关文档：<a href="https://pymotw.com/2/weakref/index.html" target="_blank" rel="noopener">https://pymotw.com/2/weakref/index.html</a></p>
 
       
@@ -509,7 +509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -531,7 +531,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
