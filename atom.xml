@@ -78,9 +78,9 @@
     </summary>
     
     
-      <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
-    
       <category term="pycharm" scheme="http://b.kohaku.cc/tags/pycharm/"/>
+    
+      <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
     
   </entry>
   
@@ -101,11 +101,11 @@
     </summary>
     
     
-      <category term="django" scheme="http://b.kohaku.cc/tags/django/"/>
+      <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
     
       <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
     
-      <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
+      <category term="django" scheme="http://b.kohaku.cc/tags/django/"/>
     
   </entry>
   
