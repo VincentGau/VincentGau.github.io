@@ -4,11 +4,47 @@
 
     
   <url>
-    <loc>http://b.kohaku.cc/2018/03/06/blockchain-1/</loc>
-    <lastmod>2018-03-27T01:30:23.489Z</lastmod>
+    <loc>http://b.kohaku.cc/2018/04/16/pythonic-code/</loc>
+    <lastmod>2018-04-17T01:14:46.258Z</lastmod>
     <data>
         <display>
-        <title>区块链初探</title>
+        <title>写更pythonic 的代码</title>
+        <pubTime>2018-04-16T08:43:13.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/04/11/blockchain-2/</loc>
+    <lastmod>2018-04-11T06:04:06.770Z</lastmod>
+    <data>
+        <display>
+        <title>区块链初探（二）</title>
+        <pubTime>2018-04-11T02:13:32.000Z</pubTime>
+        
+        <tag>Blockchain</tag>
+         
+        <tag>Bitcoin</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/03/06/blockchain-1/</loc>
+    <lastmod>2018-04-11T02:13:04.966Z</lastmod>
+    <data>
+        <display>
+        <title>区块链初探（一）</title>
         <pubTime>2018-03-06T03:24:34.000Z</pubTime>
         
         <tag>blockchain</tag>
@@ -50,11 +86,11 @@
         <title>Django 笔记</title>
         <pubTime>2018-01-12T06:59:48.000Z</pubTime>
         
-        <tag>programming</tag>
+        <tag>django</tag>
          
         <tag>python</tag>
          
-        <tag>django</tag>
+        <tag>programming</tag>
          
          
            
@@ -71,9 +107,9 @@
         <title>Go into PyCharm</title>
         <pubTime>2018-01-17T07:53:01.000Z</pubTime>
         
-        <tag>pycharm</tag>
-         
         <tag>programming</tag>
+         
+        <tag>pycharm</tag>
          
          
            
