@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://b.kohaku.cc/2018/04/16/pythonic-code/</loc>
-    <lastmod>2018-04-18T09:03:45.064Z</lastmod>
+    <lastmod>2018-04-18T09:06:27.382Z</lastmod>
     <data>
         <display>
         <title>写更pythonic 的代码</title>
@@ -92,11 +92,11 @@
         <title>Django 笔记</title>
         <pubTime>2018-01-12T06:59:48.000Z</pubTime>
         
-        <tag>django</tag>
+        <tag>programming</tag>
          
         <tag>python</tag>
          
-        <tag>programming</tag>
+        <tag>django</tag>
          
          
            
@@ -113,9 +113,9 @@
         <title>Go into PyCharm</title>
         <pubTime>2018-01-17T07:53:01.000Z</pubTime>
         
-        <tag>programming</tag>
-         
         <tag>pycharm</tag>
+         
+        <tag>programming</tag>
          
          
            
