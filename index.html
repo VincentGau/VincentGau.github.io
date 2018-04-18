@@ -358,42 +358,14 @@
 
       
         
-          
-            <h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><p>目前python有两个大版本，python2 和python3， 这两个版本互不兼容，除了语法上的差异，一些python2 的类库没有对应的python3 版本，在python3中无法使用，python3类库也可能不能用在python2 中。鉴于python 社区更关注python3 的特性和提升，python2 除了修复Bug已经不会有发展，并且越来越多的开发者企业逐渐放弃对python2 的支持，对于新项目python3 是一个更长远的选择。不过有虚拟环境的支持，使用不同版本的python也不是问题。<br>安装python的时候默认的解释器是使用C语言开发的CPython，它编译python代码生成字节码然后执行，同样流行的还有JPython（Java），IronPython（.Net），PyPy（python）这些实现，其中CPython的使用更广泛。</p>
-<h1 id="遵循PEP8-编码规范"><a href="#遵循PEP8-编码规范" class="headerlink" title="遵循PEP8 编码规范"></a>遵循PEP8 编码规范</h1><p>Python Enhancement Proposal #8（PEP8）是一套python 的编码规范，主要包括命名规范，缩进使用等，使用同一的编码规范对自己编写代码和方便别人阅读代码都是很有益的。遵循PEP8 来写出更pythonic 的代码。</p>
-<h3 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h3><ul>
-<li>函数、变量、属性使用小写字母加下划线格式（eg. my_func）；</li>
-<li>受保护的实例属性以下划线开头（eg. _protected_attr）；</li>
-<li>私有属性以双下划线开头（eg. __private_attr）；</li>
-<li>类和一场使用大写格式（eg. MyClass）；</li>
-</ul>
-<h3 id="空格使用"><a href="#空格使用" class="headerlink" title="空格使用"></a>空格使用</h3><p>经常看到用“游标卡尺”的梗来调侃Python，可见Python对缩进的严格要求，不正确的缩进格式甚至会导致代码无法正确编译，</p>
-<ul>
-<li>缩进使用空格，不用Tab；</li>
-<li>每一层语法上的有效缩进是4个空格；</li>
-<li>每行最多79个字符；</li>
-<li>长表达式在新一行的延续部分额外使用4个空格；</li>
-<li>类中的方法用一个空行隔开；<br>…</li>
-</ul>
-<p>如果使用PyCharm ，通过快捷键Ctrl + Alt + L 迅速格式化代码，默认遵循pep8 规范。</p>
-<h3 id="Pythonic的表达式和声明"><a href="#Pythonic的表达式和声明" class="headerlink" title="Pythonic的表达式和声明"></a>Pythonic的表达式和声明</h3><ul>
-<li>使用内部否定（if a is not b），而不用肯定表达式的否定（if not a is b）；</li>
-<li>使用 if not somelist 来检查是否为空，而不通过检查长度来判定（if len(somelist) == 0）；</li>
-<li>import 语句始终放在文件顶部；</li>
-<li>import 模块的时候使用绝对导入，如from foo import bar，而不是只 import foo；如果要做相对导入，也应该使用 from . import foo；</li>
-<li>导入模块的时候按照既定的顺序：先导入标准库模块，然后第三方库，最后导入自己的模块；</li>
-</ul>
-<p>更多规范见 <a href="https://www.python.org/dev/peps/pep-0008/" target="_blank" rel="noopener">PEP8</a></p>
-<p><a href="https://www.pylint.org" target="_blank" rel="noopener">Pylint</a>是一款静态Python 源代码分析工具，检查代码中不合规范的地方，个人认为其作用不止于语法规范，对编码思路也有提升，强烈推荐。</p>
-<p>除了PEP8，Google 也有一套关于python的<a href="http://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_language_rules/" target="_blank" rel="noopener">语言和风格规范</a>。建议使用一致的风格。</p>
-<h1 id="弄清str-bytes-unicode"><a href="#弄清str-bytes-unicode" class="headerlink" title="弄清str bytes unicode"></a>弄清<code>str</code> <code>bytes</code> <code>unicode</code></h1><p>在写Python代码的时候，常被编码问题困扰，不胜其烦又无可避免，彻底理解编码就是这一节的目的。  </p>
-<ul>
-<li>Python2默认的编码方式是ASCII，而Python3默认编码格式是Unicode；</li>
-<li>在Python2 中有两种类型来表示字符序列：<code>str</code> 和 <code>unicode</code>，<code>str</code>实例包含二进制数据，<code>Unicode</code>实例包含Unicode 字符；Python3中有两种类型表示字符序列： <code>str</code> 和<code>bytes</code>，<code>str</code>实例包含Unicode字符，<code>bytes</code>实例包含二进制数据；</li>
-<li>使用<code>encode</code>方法将Unicode 字符串转换成二进制数据（编码），反之用<code>decode</code>方法（解码）；</li>
-</ul>
-
-          
+          <h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><p>目前python有两个大版本，Python 2 和Python 3， 这两个版本互不兼容，除了语法上的差异，一些Python 2 的类库没有对应的Python 3 版本，在Python 3中无法使用，Python 3类库也可能不能用在Python 2 中。鉴于python 社区更关注Python 3 的特性和提升，Python 2 除了修复Bug已经不会有发展，并且越来越多的开发者企业逐渐放弃对Python 2 的支持，对于新项目Python 3 是一个更长远的选择。不过有虚拟环境的支持，使用不同版本的python也不是问题。<br>安装python的时候默认的解释器是使用C语言开发的CPython，它编译python代码生成字节码然后执行，同样流行的还有JPython（Java），IronPython（.Net），PyPy（python）这些实现，其中CPython的使用更广泛。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/pythonic-code/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1758,7 +1730,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
