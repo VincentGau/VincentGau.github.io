@@ -135,11 +135,11 @@
         <title>Travis 持续集成</title>
         <pubTime>2018-04-19T07:05:04.000Z</pubTime>
         
-        <tag>CI</tag>
-         
         <tag>Travis</tag>
          
         <tag>Github</tag>
+         
+        <tag>CI</tag>
          
          
            
@@ -156,9 +156,9 @@
         <title>Jenkins 持续集成</title>
         <pubTime>2018-04-19T07:05:45.000Z</pubTime>
         
-        <tag>Jenkins</tag>
-         
         <tag>CI</tag>
+         
+        <tag>Jenkins</tag>
          
          
            
@@ -216,9 +216,9 @@
         <title>Django 笔记</title>
         <pubTime>2018-01-12T06:59:48.000Z</pubTime>
         
-        <tag>django</tag>
-         
         <tag>python</tag>
+         
+        <tag>django</tag>
          
         <tag>programming</tag>
          

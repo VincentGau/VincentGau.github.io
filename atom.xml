@@ -131,9 +131,9 @@
     </summary>
     
     
-      <category term="Jenkins" scheme="http://b.kohaku.cc/tags/Jenkins/"/>
-    
       <category term="CI" scheme="http://b.kohaku.cc/tags/CI/"/>
+    
+      <category term="Jenkins" scheme="http://b.kohaku.cc/tags/Jenkins/"/>
     
   </entry>
   
@@ -159,11 +159,11 @@
     </summary>
     
     
-      <category term="CI" scheme="http://b.kohaku.cc/tags/CI/"/>
-    
       <category term="Travis" scheme="http://b.kohaku.cc/tags/Travis/"/>
     
       <category term="Github" scheme="http://b.kohaku.cc/tags/Github/"/>
+    
+      <category term="CI" scheme="http://b.kohaku.cc/tags/CI/"/>
     
   </entry>
   
@@ -303,9 +303,9 @@
     </summary>
     
     
-      <category term="django" scheme="http://b.kohaku.cc/tags/django/"/>
-    
       <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
+    
+      <category term="django" scheme="http://b.kohaku.cc/tags/django/"/>
     
       <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
     
