@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="asp.net,WIF,identity,authentication,authorization," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title=":: Haku's ::" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="大多数Web 应用都有用户的存在，有用户必然涉及到授权和认证来控制用户行为，除了页面资源以外，访问其他不允许匿名访问的资源（如webapi）也需要经过授权和认证，系统验证了用户身份的合法性之后用户才可以继续访问。这里分两步：授权和认证，认证（Authentication）验证用户的身份；授权（Authorization）决定用户是否有正确的权限获取指定的资源；授权、认证过程可以直接集成到单个应用程">
+<meta name="keywords" content="asp.net,WIF,identity,authentication,authorization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Identity用户体系和授权认证">
+<meta property="og:url" content="http://b.kohaku.cc/2018/06/22/identity/index.html">
+<meta property="og:site_name" content=":: Haku&#39;s ::">
+<meta property="og:description" content="大多数Web 应用都有用户的存在，有用户必然涉及到授权和认证来控制用户行为，除了页面资源以外，访问其他不允许匿名访问的资源（如webapi）也需要经过授权和认证，系统验证了用户身份的合法性之后用户才可以继续访问。这里分两步：授权和认证，认证（Authentication）验证用户的身份；授权（Authorization）决定用户是否有正确的权限获取指定的资源；授权、认证过程可以直接集成到单个应用程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://b.kohaku.cc/2018/06/22/identity/wifbasicwebapp.gif">
+<meta property="og:image" content="http://b.kohaku.cc/2018/06/22/identity/process.png">
+<meta property="og:image" content="http://b.kohaku.cc/2018/06/22/identity/post-data.png">
+<meta property="og:image" content="http://b.kohaku.cc/2018/06/22/identity/response-body.png">
+<meta property="og:updated_time" content="2018-10-11T08:33:14.239Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASP.NET Identity用户体系和授权认证">
+<meta name="twitter:description" content="大多数Web 应用都有用户的存在，有用户必然涉及到授权和认证来控制用户行为，除了页面资源以外，访问其他不允许匿名访问的资源（如webapi）也需要经过授权和认证，系统验证了用户身份的合法性之后用户才可以继续访问。这里分两步：授权和认证，认证（Authentication）验证用户的身份；授权（Authorization）决定用户是否有正确的权限获取指定的资源；授权、认证过程可以直接集成到单个应用程">
+<meta name="twitter:image" content="http://b.kohaku.cc/2018/06/22/identity/wifbasicwebapp.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://b.kohaku.cc/2018/06/22/identity/"/>
+
+
+
+
+
+  <title>ASP.NET Identity用户体系和授权认证 | :: Haku's ::</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">:: Haku's ::</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命中幻光 不可追逐</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://b.kohaku.cc/2018/06/22/identity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haku">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content=":: Haku's ::">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ASP.NET Identity用户体系和授权认证</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-22T09:30:35+08:00">
+                2018-06-22 09:30:35
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/22/identity/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/22/identity/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 本文阅读量 </i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大多数Web 应用都有用户的存在，有用户必然涉及到授权和认证来控制用户行为，除了页面资源以外，访问其他不允许匿名访问的资源（如webapi）也需要经过授权和认证，系统验证了用户身份的合法性之后用户才可以继续访问。这里分两步：授权和认证，认证（Authentication）验证用户的身份；授权（Authorization）决定用户是否有正确的权限获取指定的资源；授权、认证过程可以直接集成到单个应用程序中，对于由众多应用程序形成的生态系统，为其中每一个应用程序都开发自己的用户体系无疑是重复造轮子，而且会随之产生巨大的运维压力，用户信息的新增、撤销和修改需要在多处同时处理，若再有和外部系统对接的需求，则会使事情更加复杂，因此需要将用户授权认证模块从应用程序剥离，作为一个独立的模块供多个系统共用，基于声明（Claim-based）的联合授权认证是一个可行的方案。</p>
+<h1 id="基于声明的授权认证"><a href="#基于声明的授权认证" class="headerlink" title="基于声明的授权认证"></a>基于声明的授权认证</h1><p>基于声明的授权和认证并不是全新的概念，在联合安全模型中，认证和授权过程与应用程序本身分开，认证和授权是另外的单独的Web服务，即安全令牌服务（Security Token Service, STS），STS负责颁发安全令牌；信赖方应用程序（Relying Party，RP）不进行用户认证，不再保存用户名和密码，不关心认证方如何认证，在认证方认证成功之后返回一个令牌，令牌中包含了信赖方需要的用户名、角色、权限等用来认证用户身份的信息。这种方式避免了针对一个用户需要管理多个副本的情况，密码同步的问题也不复存在，并且能满足单点登录（SSO）的场景，用户在登录一个应用程序之后无需再次进行身份认证即可获得访问另一个应用的权限。在基于声明的应用程序中，用户身份将通过一组声明来表示，一个声明可能是用户名，也可能是邮箱地址、年龄等等。<br>基于声明的联合认证方式具有以下特点：</p>
+<ul>
+<li>将身份验证机制从应用程序和服务中分离出来，实现与应用程序的松耦合；</li>
+<li>使用声明（Claim）代替角色（Role），声明是一种更灵活、更精确的对象，它可以包括角色及其他信息；</li>
+<li>安全令牌服务STS可以仅作为一个功能模块在用户管理系统中实现，并且依赖方应用程序可以很方便地与STS建立关系；</li>
+</ul>
+<h2 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h2><p>在基于声明的应用场景中，通常包含三方参与者，分别是：应用程序自身，终端用户和STS。<br><img src="/2018/06/22/identity/wifbasicwebapp.gif"></p>
+<ol>
+<li>用户访问依赖方应用程序，依赖方应用程序发现该未经认证的请求，于是重定向到STS 服务；</li>
+<li>STS 服务需要用户提供凭证以验证身份，认证成功之后STS 会颁发一个令牌给用户；</li>
+<li>带着这个令牌，用户请求会被STS 服务重定向到依赖方应用程序；</li>
+<li>依赖方应用程序提前通过配置信任该STS 和它颁发的令牌，它会取出令牌中的声明信息，实现用户验证，之后会生成一个cookie，以便下次访问；  </li>
+</ol>
+<p>也就是说，在依赖方与STS服务建立起信任关系之后，当用户请求依赖方应用的资源时，依赖方应用程序不关心登录过程，不关心用户角色，只需要把用户重定向到STS，由STS作验证和返回令牌，依赖方应用程序从令牌中获取需要的信息。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p><strong>声明</strong>是标识信息描述，如：用户名，部门，角色信息等。身份提供者验证成功后会返回一组声明，信赖方应用程序根据声明进行授权；应用程序接收到的声明越多，对用户的了解就越详细；应用程序并不会去某一个路径查询用户的声明，而是用户发送声明给应用程序，应用程序会检测这些声明，通过Issuer 字段表示知道声明的颁发者，应用程序只会接受受信任的颁发者生成的声明。<br><strong>令牌</strong>是声明传输的载体，是发行机构（STS）签名的一组序列化的声明；用户会将一组声明和请求一起通过POST 方式发送给应用程序，在安全性要求不高的场景中也可以使用不签名的声明；<br><strong>STS</strong>，安全令牌服务，一个负责认证用户并颁发令牌的服务，它把声明打包进令牌，对令牌进行签名和加密；<br><strong>依赖方应用程序</strong>即依赖声明的应用程序，它将用户认证逻辑代理出去给STS，提取STS 颁发的令牌中的声明并将它们用于身份验证；  </p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>下面以一个具体场景为例，分析访问过程中的具体HTTP请求进一步理解基于声明的认证：<br>场景中涉及两个应用：一个是依赖方应用（例子中地址为 <code>http://localhost:19851/</code>），需要验证用户身份；一个是用户管理应用，用户数据保存在这里，也在这里对用户信息进行增删改查，同时STS也包含在这个系统中（例子中地址为 <code>http://localhost:62398/</code>）；  </p>
+<img src="/2018/06/22/identity/process.png">
+<ol>
+<li>用户访问依赖方应用；</li>
+<li>如果已有登录凭据则直接进入访问对应资源；如果没有登录凭据，则跳转向STS服务请求安全令牌，并在请求中附带来源信息以便在登录之后重新跳转回去；</li>
+<li>用户被重定向到Identity用户管理的登录页面；</li>
+<li>用户登录成功后跳转回指定页面，生成Token；  </li>
+<li>经过权限验证之后用户被重定向至最初的依赖方页面；</li>
+</ol>
+<p>这个过程中发生的HTTP请求有：</p>
+<ul>
+<li>请求依赖方地址<code>http://localhost:19851/</code>：<br><strong>request</strong>：GET / HTTP/1.1<br><strong>response</strong>：HTTP/1.1 302 Found<br>Location:<br><code>http://localhost:62398/?wa=wsignin1.0&amp;wtrealm=http%3A%2F%2Flocalhost%3A19851%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%252F&amp;wct=2018-09-25T06%3A25%3A12Z</code><br><em>请求依赖方地址，被重定向到STS</em>。以上重定向地址的query string中：<br><code>wa</code> 取值<code>wsignin1.0</code>表示登录请求，<code>wsignout1.0</code>表示登出请求；<br><code>wtrealm</code> 表示依赖方应用的URI， STS通过它来决定是否颁发令牌以及给予哪些声明；<br><code>wct</code> 记录请求时间，STS用于校验判断请求是否超时；<br><code>wtreply</code> 可选项，表示依赖方希望被重定向到的地址；</li>
+</ul>
+<ul>
+<li><p>请求STS<code>http://localhost:62398/</code>，被重定向到登录页面：<br><strong>request</strong>：GET<br><code>/?wa=wsignin1.0&amp;wtrealm=http%3A%2F%2Flocalhost%3A19851%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%252F&amp;wct=2018-09-25T06%3A25%3A12Z HTTP/1.1</code><br><strong>response</strong>：HTTP/1.1 302 Found<br>Location:<br><code>/login.aspx?ReturnUrl=%2f%3fwa%3dwsignin1.0%26wtrealm%3dhttp%253A%252F%252Flocalhost%253A19851%252F%26wctx%3drm%253D0%2526id%253Dpassive%2526ru%253D%25252F%26wct%3d2018-09-25T06%253A25%253A12Z&amp;wa=wsignin1.0&amp;wtrealm=http%3A%2F%2Flocalhost%3A19851%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%252F&amp;wct=2018-09-25T06%3A25%3A12Z</code><br>由于用户没有登录，被重定向到STS的地址后再次被重定向到登录页面；</p>
+</li>
+<li><p>请求登录页面<code>http://localhost:62398/</code>：<br><strong>request</strong>：GET<br><code>/login.aspx?ReturnUrl=%2f%3fwa%3dwsignin1.0%26wtrealm%3dhttp%253A%252F%252Flocalhost%253A19851%252F%26wctx%3drm%253D0%2526id%253Dpassive%2526ru%253D%25252F%26wct%3d2018-09-25T06%253A25%253A12Z&amp;wa=wsignin1.0&amp;wtrealm=http%3A%2F%2Flocalhost%3A19851%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%252F&amp;wct=2018-09-25T06%3A25%3A12Z HTTP/1.1</code><br><strong>response</strong>：HTTP/1.1 200 OK<br>显示STS登录页面，等待用户输入登录信息；</p>
+</li>
+<li><p>用户登录<code>http://localhost:62398/</code>：<br><strong>request</strong>：POST<br><code>/login.aspx?ReturnUrl=%2f%3fwa%3dwsignin1.0%26wtrealm%3dhttp%253A%252F%252Flocalhost%253A19851%252F%26wctx%3drm%253D0%2526id%253Dpassive%2526ru%253D%25252F%26wct%3d2018-09-25T06%253A25%253A12Z&amp;wa=wsignin1.0&amp;wtrealm=http%3a%2f%2flocalhost%3a19851%2f&amp;wctx=rm%3d0%26id%3dpassive%26ru%3d%252F&amp;wct=2018-09-25T06%3a25%3a12Z HTTP/1.1</code></p>
+<img src="/2018/06/22/identity/post-data.png">
+<p><strong>response</strong>：HTTP/1.1 302 Found<br>Location:<br><code>/?wa=wsignin1.0&amp;wtrealm=http%3A%2F%2Flocalhost%3A19851%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%252F&amp;wct=2018-09-25T06%3A25%3A12Z</code><br>Set-Cookie: <code>.ASPXAUTH=blablabla; path=/; HttpOnly</code><br><em>用户POST表单数据之后，被重定向回STS；</em></p>
+</li>
+<li><p>请求STS地址<code>http://localhost:62398/</code>：<br><strong>request</strong>：GET<br><code>/?wa=wsignin1.0&amp;wtrealm=http%3A%2F%2Flocalhost%3A19851%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%252F&amp;wct=2018-09-25T06%3A25%3A12Z HTTP/1.1</code><br><strong>response</strong>：HTTP/1.1 200 OK  </p>
+<img src="/2018/06/22/identity/response-body.png">
+<p>带cookie请求STS地址，响应页面包含一个自动提交的form；</p>
+</li>
+<li><p>自动提交表单<code>http://localhost:19851/</code><br><strong>request</strong>：POST / HTTP/1.1<br>  <code>.ASPXAUTH=blablabla</code><br><strong>response</strong>：HTTP/1.1 302 Found<br>Location: /<br>Set-Cookie: <code>FedAuth=blablabla; path=/; HttpOnly</code><br>Set-Cookie: <code>FedAuth1=blablabla; path=/; HttpOnly</code><br><em>自动提交表单，将token发送到依赖方地址；</em></p>
+</li>
+</ul>
+<ul>
+<li>访问依赖方地址<code>http://localhost:19851/</code>：<br><strong>request</strong>：GET / HTTP/1.1<br><strong>response</strong>：HTTP/1.1 200 OK<br><em>依赖方消费Token，用户最终访问到依赖方应用；</em></li>
+</ul>
+<h2 id="基于声明和基于角色的区别"><a href="#基于声明和基于角色的区别" class="headerlink" title="基于声明和基于角色的区别"></a>基于声明和基于角色的区别</h2><p>在基于角色的访问控制（Role-based Access Control，RBAC）中，用户权限通过一个基于角色的应用程序来管理和执行，如果用户拥有执行一个动作需要的角色，则该动作被允许；和基于角色的模型相比，Claim-based的方式不与角色捆绑，具有更好的灵活性和扩展性，声明并不局限于角色和权限，还能附带用户的其他信息，比如邮箱、生日，比如还可以通过isOver18 声明在不透露用户具体年龄的情况下验证用户是否有权限等等，授权的决定基于声明中的有效数据的任意逻辑，而在RBAC中，唯一使用的声明就是角色。</p>
+<h2 id="Claims认证与OAuth"><a href="#Claims认证与OAuth" class="headerlink" title="Claims认证与OAuth"></a>Claims认证与OAuth</h2><p>OAuth是用于授权的工业标准协议，基于声明的认证与OAuth有不同的适用场景：<br>Claim-based：</p>
+<ul>
+<li>用于应用程序和用户身份认证解耦；</li>
+<li>事前约定建立信任关系，用户声明由身份管理员维护；</li>
+<li>安全令牌服务将声明包含在令牌中颁发并提交给应用；<br>OAuth：</li>
+<li>用户可选授权；</li>
+<li>用于与第三方合作，应用本身有自己的用户体系；</li>
+<li>获取访问令牌去资源服务器获取；</li>
+</ul>
+<h1 id="基于声明的Web应用的实现"><a href="#基于声明的Web应用的实现" class="headerlink" title="基于声明的Web应用的实现"></a>基于声明的Web应用的实现</h1><h2 id="WIF"><a href="#WIF" class="headerlink" title="WIF"></a>WIF</h2><p>Windows Identity Framework（WIF）是一组.Net Framework 类库，实现身份感知的（Identity-aware）、基于声明（Claim-based）的应用程序和服务，WIF 原本作为独立下载的类库发布，现已经集成到.Net 4.5 中。有了WIF，我们可以自定义安全令牌服务，更容易地开发基于声明的Web 应用而无需再安装其他组件。</p>
+<h2 id="依赖方应用配置"><a href="#依赖方应用配置" class="headerlink" title="依赖方应用配置"></a>依赖方应用配置</h2><p>依赖方Web应用程序如需使用已有的自定义STS进行身份认证，需要给项目添加引用并修改配置文件：<br>需要添加的引用包括<code>System.IdentityModel</code> 和<code>System.IdentityModel.Services</code>；<br>需要编辑配置文件web.config，使用基于声明的认证方式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">system.webServer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">"WSFederationAuthenticationModule"</span> <span class="attr">type</span>=<span class="string">"System.IdentityModel.Services.WSFederationAuthenticationModule, System.IdentityModel.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"</span> <span class="attr">preCondition</span>=<span class="string">"managedHandler"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">"SessionAuthenticationModule"</span> <span class="attr">type</span>=<span class="string">"System.IdentityModel.Services.SessionAuthenticationModule, System.IdentityModel.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"</span> <span class="attr">preCondition</span>=<span class="string">"managedHandler"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.webServer</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>配置URL地址与处理程序：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">system.identityModel</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">identityConfiguration</span> <span class="attr">saveBootstrapContext</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">issuerTokenResolver</span> <span class="attr">type</span>=<span class="string">"SimpleWebToken.CustomIssuerTokenResolver, SimpleWebToken"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">AddAudienceKeyPair</span>  <span class="attr">symmetricKey</span>=<span class="string">"wAVkldQiFypTQ+kdNdGWCYCHRcee8XmXxOvgmak8vSY="</span> <span class="attr">audience</span>=<span class="string">"http://localhost:19851/"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">issuerTokenResolver</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">issuerNameRegistry</span> <span class="attr">type</span>=<span class="string">"RelyingParty.TrustedIssuerNameRegistry, RelyingParty"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">audienceUris</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">add</span> <span class="attr">value</span>=<span class="string">"http://localhost:19851/"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">audienceUris</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">securityTokenHandlers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">add</span> <span class="attr">type</span>=<span class="string">"SimpleWebToken.SimpleWebTokenHandler, SimpleWebToken"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">securityTokenHandlers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">identityConfiguration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.identityModel</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">system.identityModel.services</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">federationConfiguration</span> <span class="attr">identityConfigurationName</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">serviceCertificate</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">certificateReference</span> <span class="attr">x509FindType</span>=<span class="string">"FindBySubjectName"</span> <span class="attr">findValue</span>=<span class="string">"localhost"</span> <span class="attr">storeLocation</span>=<span class="string">"LocalMachine"</span> <span class="attr">storeName</span>=<span class="string">"My"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">serviceCertificate</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">wsFederation</span> <span class="attr">passiveRedirectEnabled</span>=<span class="string">"true"</span> <span class="attr">issuer</span>=<span class="string">"http://localhost:62398/"</span> <span class="attr">realm</span> =<span class="string">"http://localhost:19851/"</span> <span class="attr">requireHttps</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">cookieHandler</span> <span class="attr">mode</span>=<span class="string">"Default"</span> <span class="attr">requireSsl</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">chunkedCookieHandler</span> <span class="attr">chunkSize</span>=<span class="string">"2000"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">cookieHandler</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">federationConfiguration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.identityModel.services</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上述配置中：<br><code>audienceUris</code> 标签指定依赖方应用的URL;<br><code>securityTokenHandlers</code> 标签指定处理token 的类和方法，可以使用自定义的方法或内建的方法；<br><code>issuerNameRegistry</code>标签指定token 处理程序使用的颁发者；<br>配置完成后，访问依赖方应用需要身份认证的页面时会跳转至STS进行登录操作。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>用户授权认证是大多数应用程序都需要经过的流程，目前各种框架种类众多，基于声明的模型中用户身份由一组声明表示，通过配置一个受信任的外部身份系统为我们自己的应用程序提供关于用户的所有必要信息，在这种模型下，单点登录也能较为简单的实现，应用程序本身不处理任何用户认证相关的逻辑，并且不需要保存用户账户和密码等数据，也不用主动查询用户的详细信息，只需从受信任的令牌发布程序接受安全令牌即可。一个新的应用依赖自定义的STS进行身份认证和授权只需要简单的配置，用户管理方便，安全性有保障，对于不适合使用我行现有的统一安全认证平台的单个或多个应用，ASP.NET 基于声明的模型是一个可选的方案。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/asp-net/" rel="tag"># asp.net</a>
+          
+            <a href="/tags/WIF/" rel="tag"># WIF</a>
+          
+            <a href="/tags/identity/" rel="tag"># identity</a>
+          
+            <a href="/tags/authentication/" rel="tag"># authentication</a>
+          
+            <a href="/tags/authorization/" rel="tag"># authorization</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/19/Jenkins-CI/" rel="next" title="Jenkins 持续集成">
+                <i class="fa fa-chevron-left"></i> Jenkins 持续集成
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/10/HakuGo/" rel="prev" title="从零开始五子棋">
+                从零开始五子棋 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Haku" />
+            
+              <p class="site-author-name" itemprop="name">Haku</p>
+              <p class="site-description motion-element" itemprop="description">生命中幻光 不可追逐</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:g@kohaku.cc" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://kohaku.cc" target="_blank" title="旧版">
+                    
+                      <i class="fa fa-fw fa-link"></i>旧版</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于声明的授权认证"><span class="nav-number">1.</span> <span class="nav-text">基于声明的授权认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#认证过程"><span class="nav-number">1.1.</span> <span class="nav-text">认证过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释"><span class="nav-number">1.2.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于声明和基于角色的区别"><span class="nav-number">1.4.</span> <span class="nav-text">基于声明和基于角色的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Claims认证与OAuth"><span class="nav-number">1.5.</span> <span class="nav-text">Claims认证与OAuth</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于声明的Web应用的实现"><span class="nav-number">2.</span> <span class="nav-text">基于声明的Web应用的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WIF"><span class="nav-number">2.1.</span> <span class="nav-text">WIF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖方应用配置"><span class="nav-number">2.2.</span> <span class="nav-text">依赖方应用配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Haku</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> 访客数 </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量 </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9JCRyiczKif6v3F0ljFiA3VQ-gzGzoHsz',
+        appKey: 'Ih95rLJBtbIu19JyHtK1vQQf',
+        placeholder: '=。=',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

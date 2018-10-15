@@ -4,8 +4,92 @@
 
     
   <url>
+    <loc>http://b.kohaku.cc/2018/09/22/oneday/</loc>
+    <lastmod>2018-10-15T06:48:33.674Z</lastmod>
+    <data>
+        <display>
+        <title>指缝</title>
+        <pubTime>2018-09-22T03:07:07.000Z</pubTime>
+        
+        <tag>随笔</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/10/11/travelsd/</loc>
+    <lastmod>2018-10-15T03:05:34.061Z</lastmod>
+    <data>
+        <display>
+        <title>travelsd</title>
+        <pubTime>2018-10-11T02:48:24.000Z</pubTime>
+        
+        <tag>travel</tag>
+         
+        <tag>family</tag>
+         
+        <tag>gourmet</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/06/22/identity/</loc>
+    <lastmod>2018-10-11T08:33:14.239Z</lastmod>
+    <data>
+        <display>
+        <title>ASP.NET Identity用户体系和授权认证</title>
+        <pubTime>2018-06-22T01:30:35.000Z</pubTime>
+        
+        <tag>asp.net</tag>
+         
+        <tag>WIF</tag>
+         
+        <tag>identity</tag>
+         
+        <tag>authentication</tag>
+         
+        <tag>authorization</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/08/10/HakuGo/</loc>
+    <lastmod>2018-08-10T07:49:22.115Z</lastmod>
+    <data>
+        <display>
+        <title>从零开始五子棋</title>
+        <pubTime>2018-08-10T02:31:14.000Z</pubTime>
+        
+        <tag>alpha-bate pruning</tag>
+         
+        <tag>AI</tag>
+         
+        <tag>五子棋</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://b.kohaku.cc/2018/04/16/pythonic-code/</loc>
-    <lastmod>2018-04-18T09:06:27.382Z</lastmod>
+    <lastmod>2018-04-27T07:31:01.740Z</lastmod>
     <data>
         <display>
         <title>写更pythonic 的代码</title>
@@ -27,6 +111,63 @@
 
     
   <url>
+    <loc>http://b.kohaku.cc/2018/03/06/blockchain-1/</loc>
+    <lastmod>2018-04-23T06:30:12.898Z</lastmod>
+    <data>
+        <display>
+        <title>区块链初探（一）</title>
+        <pubTime>2018-03-06T03:24:34.000Z</pubTime>
+        
+        <tag>blockchain</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/04/19/Travis-CI/</loc>
+    <lastmod>2018-04-19T09:35:02.478Z</lastmod>
+    <data>
+        <display>
+        <title>Travis 持续集成</title>
+        <pubTime>2018-04-19T07:05:04.000Z</pubTime>
+        
+        <tag>CI</tag>
+         
+        <tag>Travis</tag>
+         
+        <tag>Github</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/04/19/Jenkins-CI/</loc>
+    <lastmod>2018-04-19T07:06:07.103Z</lastmod>
+    <data>
+        <display>
+        <title>Jenkins 持续集成</title>
+        <pubTime>2018-04-19T07:05:45.000Z</pubTime>
+        
+        <tag>Jenkins</tag>
+         
+        <tag>CI</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://b.kohaku.cc/2018/04/11/blockchain-2/</loc>
     <lastmod>2018-04-11T06:04:06.770Z</lastmod>
     <data>
@@ -37,23 +178,6 @@
         <tag>Blockchain</tag>
          
         <tag>Bitcoin</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://b.kohaku.cc/2018/03/06/blockchain-1/</loc>
-    <lastmod>2018-04-11T02:13:04.966Z</lastmod>
-    <data>
-        <display>
-        <title>区块链初探（一）</title>
-        <pubTime>2018-03-06T03:24:34.000Z</pubTime>
-        
-        <tag>blockchain</tag>
          
          
            
@@ -92,11 +216,11 @@
         <title>Django 笔记</title>
         <pubTime>2018-01-12T06:59:48.000Z</pubTime>
         
-        <tag>programming</tag>
+        <tag>django</tag>
          
         <tag>python</tag>
          
-        <tag>django</tag>
+        <tag>programming</tag>
          
          
            
@@ -113,9 +237,9 @@
         <title>Go into PyCharm</title>
         <pubTime>2018-01-17T07:53:01.000Z</pubTime>
         
-        <tag>pycharm</tag>
-         
         <tag>programming</tag>
+         
+        <tag>pycharm</tag>
          
          
            
