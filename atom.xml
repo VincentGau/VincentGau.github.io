@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://b.kohaku.cc/"/>
-  <updated>2018-10-15T03:05:34.061Z</updated>
+  <updated>2018-10-17T01:37:37.474Z</updated>
   <id>http://b.kohaku.cc/</id>
   
   <author>
@@ -17,22 +17,57 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>travelsd</title>
+    <title>光里的妈妈</title>
+    <link href="http://b.kohaku.cc/2018/10/16/mom-in-the-light/"/>
+    <id>http://b.kohaku.cc/2018/10/16/mom-in-the-light/</id>
+    <published>2018-10-16T13:36:16.000Z</published>
+    <updated>2018-10-17T01:37:37.474Z</updated>
+    
+    <content type="html"><![CDATA[<p>十月的天已经黑得很早，下班回家天已经黑了八九分。</p><p>路过窗户的时候，我喜欢停下来，站在窗外对窗里的妈妈呼喊几声。以前天黑的晚，看到不进门在外张牙舞爪的我，她就会习惯性的嗔骂一句，我会十分开心。</p><p>又一次我见厨房亮着灯，妈妈看不见一片漆黑中的我，专注地准备晚上的饭菜。这扇窗户就这样隔绝了我俩，没有声音，只有我能看见，我努力地蹦跳呼喊都没有被发觉，慢慢地周围变得安静起来，我是旁观者凝望着只有影像没有声音的画面，心里暖暖的。</p><p>按下门铃我飞快又回到窗前，妈妈脸上的笑让我的世界恢复了声音~</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;十月的天已经黑得很早，下班回家天已经黑了八九分。&lt;/p&gt;
+&lt;p&gt;路过窗户的时候，我喜欢停下来，站在窗外对窗里的妈妈呼喊几声。以前天黑的晚，看到不进门在外张牙舞爪的我，她就会习惯性的嗔骂一句，我会十分开心。&lt;/p&gt;
+&lt;p&gt;又一次我见厨房亮着灯，妈妈看不见一片漆黑中的我，专注地
+      
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://b.kohaku.cc/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="family" scheme="http://b.kohaku.cc/tags/family/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2018顺德之旅</title>
     <link href="http://b.kohaku.cc/2018/10/11/travelsd/"/>
     <id>http://b.kohaku.cc/2018/10/11/travelsd/</id>
     <published>2018-10-11T02:48:24.000Z</published>
-    <updated>2018-10-15T03:05:34.061Z</updated>
+    <updated>2018-10-16T02:25:19.794Z</updated>
+    
+    <content type="html"><![CDATA[<p>时隔五年，再次来到顺德，</p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;时隔五年，再次来到顺德，&lt;/p&gt;
+
+      
     
     </summary>
     
     
-      <category term="travel" scheme="http://b.kohaku.cc/tags/travel/"/>
-    
       <category term="family" scheme="http://b.kohaku.cc/tags/family/"/>
     
-      <category term="gourmet" scheme="http://b.kohaku.cc/tags/gourmet/"/>
+      <category term="travel" scheme="http://b.kohaku.cc/tags/travel/"/>
+    
+      <category term="顺德" scheme="http://b.kohaku.cc/tags/%E9%A1%BA%E5%BE%B7/"/>
     
   </entry>
   
@@ -41,7 +76,7 @@
     <link href="http://b.kohaku.cc/2018/09/22/oneday/"/>
     <id>http://b.kohaku.cc/2018/09/22/oneday/</id>
     <published>2018-09-22T03:07:07.000Z</published>
-    <updated>2018-10-15T06:48:33.674Z</updated>
+    <updated>2018-10-17T01:37:50.134Z</updated>
     
     <content type="html"><![CDATA[<p>今天是中秋假期的第一天，早晨眼睛睁开得很干脆，像是被一种力量召唤。</p><p>眼角余光察觉到窗帘被风吸出窗外，形成一片饱满的穹幕。轻风穿过薄被，透过皮囊，缓缓波动的穹幕就是我此刻的心情。</p><p>不知道是不是幻觉，房间亮的很清澈。浮动的帘幕遮挡住视线，却解放了想象力：我看到了晨光，听到了树叶的声音，站在了高耸入云的楼顶，在一刹那精骛八极，心游万仞……</p><p>兴冲冲，失落落，直为自己早早拉开窗帘的行为懊恼不已。</p><img src="/2018/09/22/oneday/pic.jpg">]]></content>
     
@@ -55,6 +90,8 @@
       
     
     </summary>
+    
+      <category term="随笔" scheme="http://b.kohaku.cc/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
       <category term="随笔" scheme="http://b.kohaku.cc/tags/%E9%9A%8F%E7%AC%94/"/>
@@ -131,9 +168,9 @@
     </summary>
     
     
-      <category term="CI" scheme="http://b.kohaku.cc/tags/CI/"/>
-    
       <category term="Jenkins" scheme="http://b.kohaku.cc/tags/Jenkins/"/>
+    
+      <category term="CI" scheme="http://b.kohaku.cc/tags/CI/"/>
     
   </entry>
   
@@ -159,11 +196,11 @@
     </summary>
     
     
+      <category term="CI" scheme="http://b.kohaku.cc/tags/CI/"/>
+    
       <category term="Travis" scheme="http://b.kohaku.cc/tags/Travis/"/>
     
       <category term="Github" scheme="http://b.kohaku.cc/tags/Github/"/>
-    
-      <category term="CI" scheme="http://b.kohaku.cc/tags/CI/"/>
     
   </entry>
   
@@ -303,9 +340,9 @@
     </summary>
     
     
-      <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
-    
       <category term="django" scheme="http://b.kohaku.cc/tags/django/"/>
+    
+      <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
     
       <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
     
@@ -478,29 +515,6 @@
     
     
       <category term="不知所云" scheme="http://b.kohaku.cc/tags/%E4%B8%8D%E7%9F%A5%E6%89%80%E4%BA%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>老房子</title>
-    <link href="http://b.kohaku.cc/2010/11/20/the-old-house/"/>
-    <id>http://b.kohaku.cc/2010/11/20/the-old-house/</id>
-    <published>2010-11-19T19:02:55.000Z</published>
-    <updated>2017-12-23T06:33:22.844Z</updated>
-    
-    <content type="html"><![CDATA[<p>我有一间老房子</p><p>住着黄昏的破屋与大河 烟囱和桥梁</p><a id="more"></a><p>飘雪的夜晚里 紫色的长阶梯</p><p>半开着门的旧楼房</p><p>水泥路边独树一帜的木屋</p><p>被斑驳阳光装饰的铁门 闪烁着的叶的影子</p><p>如丝细雨 荒凉山路</p><p>夏天静谧的小镇 没有声音 也没有风</p><p>到了尽头的巷子 名叫胡蝶梦</p><p>耀眼的阳光 融化了一圈树叶和白云</p><p>日历上摆动的老时钟 嗒嗒嗒 凝望着</p><p>窗户下安静看书的小娃娃</p><p>枝桠上独舞的红丝带</p><p>阴沉的乌云 肃杀的古堡</p><p>烫金的晚霞 利剑般的高楼大厦</p><p>沧海明月 两处天涯</p><p>我有一间老房子</p><p>名字 叫《遗忘》</p><p>住着黄昏的破屋与大河 烟囱和桥梁</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我有一间老房子&lt;/p&gt;
-&lt;p&gt;住着黄昏的破屋与大河 烟囱和桥梁&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://b.kohaku.cc/categories/Life/"/>
-    
-    
-      <category term="年少荒唐" scheme="http://b.kohaku.cc/tags/%E5%B9%B4%E5%B0%91%E8%8D%92%E5%94%90/"/>
     
   </entry>
   

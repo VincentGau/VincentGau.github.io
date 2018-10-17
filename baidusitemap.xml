@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://b.kohaku.cc/2018/09/22/oneday/</loc>
-    <lastmod>2018-10-15T06:48:33.674Z</lastmod>
+    <lastmod>2018-10-17T01:37:50.134Z</lastmod>
     <data>
         <display>
         <title>指缝</title>
@@ -15,6 +15,29 @@
          
          
            
+             
+              <breadCrumb title="随笔" url="http://b.kohaku.cc/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/10/16/mom-in-the-light/</loc>
+    <lastmod>2018-10-17T01:37:37.474Z</lastmod>
+    <data>
+        <display>
+        <title>光里的妈妈</title>
+        <pubTime>2018-10-16T13:36:16.000Z</pubTime>
+        
+        <tag>family</tag>
+         
+         
+           
+             
+              <breadCrumb title="随笔" url="http://b.kohaku.cc/categories/%E9%9A%8F%E7%AC%94/"/>
+          
         </display>
     </data>
     </url>
@@ -22,17 +45,17 @@
     
   <url>
     <loc>http://b.kohaku.cc/2018/10/11/travelsd/</loc>
-    <lastmod>2018-10-15T03:05:34.061Z</lastmod>
+    <lastmod>2018-10-16T02:25:19.794Z</lastmod>
     <data>
         <display>
-        <title>travelsd</title>
+        <title>2018顺德之旅</title>
         <pubTime>2018-10-11T02:48:24.000Z</pubTime>
         
-        <tag>travel</tag>
-         
         <tag>family</tag>
          
-        <tag>gourmet</tag>
+        <tag>travel</tag>
+         
+        <tag>顺德</tag>
          
          
            
@@ -135,11 +158,11 @@
         <title>Travis 持续集成</title>
         <pubTime>2018-04-19T07:05:04.000Z</pubTime>
         
+        <tag>CI</tag>
+         
         <tag>Travis</tag>
          
         <tag>Github</tag>
-         
-        <tag>CI</tag>
          
          
            
@@ -156,9 +179,9 @@
         <title>Jenkins 持续集成</title>
         <pubTime>2018-04-19T07:05:45.000Z</pubTime>
         
-        <tag>CI</tag>
-         
         <tag>Jenkins</tag>
+         
+        <tag>CI</tag>
          
          
            
@@ -216,9 +239,9 @@
         <title>Django 笔记</title>
         <pubTime>2018-01-12T06:59:48.000Z</pubTime>
         
-        <tag>python</tag>
-         
         <tag>django</tag>
+         
+        <tag>python</tag>
          
         <tag>programming</tag>
          
