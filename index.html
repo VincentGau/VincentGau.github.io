@@ -278,6 +278,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://b.kohaku.cc/2018/10/19/max-heap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haku">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content=":: Haku's ::">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/19/max-heap/" itemprop="url">最大/最小堆</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-19T14:39:03+08:00">
+                2018-10-19 14:39:03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/19/max-heap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/19/max-heap/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="堆的特性"><a href="#堆的特性" class="headerlink" title="堆的特性"></a>堆的特性</h1><ul>
+<li>堆是一棵完全二叉树（除了最底层，其余各层节点数都达到最大，最底层的节点都在左边）；</li>
+<li>堆的左右子树仍然是堆；</li>
+<li>堆中每个节点的值都不大于/不小于其子节点的值；</li>
+</ul>
+<p>由于堆是完全二叉树，所以对于序号<code>i</code>的节点（根节点序号为0）, 其左子节点序号为<code>2i + 1</code>，右子节点序号为<code>2i + 2</code>， 父节点序号为<code>floor((i-1)/2)</code>；</p>
+<h1 id="堆的操作"><a href="#堆的操作" class="headerlink" title="堆的操作"></a>堆的操作</h1><h2 id="调整节点"><a href="#调整节点" class="headerlink" title="调整节点"></a>调整节点</h2><p>找到节点和其子节点中最大的那个，将它与该节点交换，如果节点本身就是最大则不发生交换；一次调整之后，子树不一定仍满足最大堆特性，因此需要继续调整，使整棵树保持最大堆特性。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//调整最大堆，将值大的节点上移</span><br><span class="line">private static void heapifyMax(int[] array, int index, int size)</span><br><span class="line">&#123;</span><br><span class="line">    int left = <span class="number">2</span> * index + <span class="number">1</span>;</span><br><span class="line">    int right = <span class="number">2</span> * index + <span class="number">2</span>;</span><br><span class="line">    int max = index;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(left &lt; size &amp;&amp; array[left] &gt; array[max])</span><br><span class="line">    &#123;</span><br><span class="line">        max = left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(right &lt; size &amp;&amp; array[right] &gt; array[max])</span><br><span class="line">    &#123;</span><br><span class="line">        max = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 有调整，将大的节点上移</span><br><span class="line">    <span class="keyword">if</span>(max != index)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(ref array[index], ref array[max]);</span><br><span class="line">        heapifyMax(array, max, size);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static void swap(ref int a, ref int b)</span><br><span class="line">&#123;</span><br><span class="line">    int temp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="构造最大堆"><a href="#构造最大堆" class="headerlink" title="构造最大堆"></a>构造最大堆</h2><p>从最后一个叶子节点的父节点开始调整节点，直到前面所有节点都调整完毕，最大堆即构造完成；<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private static void buildMaxHeap(int[] array)</span><br><span class="line">&#123;</span><br><span class="line">    // 从最后一个节点的父节点开始，向上调用调整最大堆</span><br><span class="line">    <span class="keyword">for</span>(int i = array.Length /<span class="number">2</span> <span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        heapifyMax(array, i, array.Length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h2><p>将节点插入到二叉树的最后一个叶子结点位置上，然后将它与它的父节点比较，如果比父节点小则停下，如果大则交换位置，然后对父节点递归直到根节点；</p>
+<h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p>最大堆中，堆顶元素的值最大，取出堆顶元素后调整堆中余下节点，使继续保持最大堆的特性，再次取出堆顶元素，持续此过程直到最后一个元素。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 初始化最大堆，堆顶元素最大，将堆顶元素和最后一个叶子结点交换，重新调整二叉树保持最大堆特</span><br><span class="line">//性；下次操作时排除尾部已排序的元素（通过heapifyMax 方法的最后一个参数决定）</span><br><span class="line">private static void heapSort(int[] array)</span><br><span class="line">&#123;</span><br><span class="line">    buildMaxHeap(array);</span><br><span class="line">    <span class="keyword">for</span>(int i = array.Length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(ref array[<span class="number">0</span>], ref array[i]);</span><br><span class="line">        heapifyMax(array, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="TOP-K"><a href="#TOP-K" class="headerlink" title="TOP K"></a>TOP K</h1><p>从大量数据中找出前K 大的数。最直接的方法对所有数据进行排序后取前K 个。我们的目的是找到这K个数，既不需要管其他的数是何顺序，也不要求这K个数有序，数据量大时对所有数据进行排序性价比太低。一种思路是维护一个大小为K 的最小堆，首先将任意K 个数放入堆中，余下的每个元素依次与堆顶元素进行比较，如果它比堆顶元素大，则删除堆顶元素，并将新的元素放入堆中，重新调整堆；<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 找到最大的K个元素</span><br><span class="line">private static void topK(int[] array, int K, int[] kMax)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; K; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        kMax[i] = array[i];</span><br><span class="line">    &#125;</span><br><span class="line">    buildMinHeap(kMax);</span><br><span class="line">    <span class="keyword">for</span> (int j = K; j &lt; array.Length; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(array[j] &gt; kMax[<span class="number">0</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            swap(ref kMax[<span class="number">0</span>], ref array[j]);</span><br><span class="line">            heapifyMin(kMax, <span class="number">0</span>, K);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://b.kohaku.cc/2018/10/16/mom-in-the-light/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -381,10 +521,10 @@
       
         
           
-            <p>十月的天已经黑得很早，下班回家天已经黑了八九分。</p>
-<p>路过窗户的时候，我喜欢停下来，站在窗外对窗里的妈妈呼喊几声。以前天黑的晚，看到不进门在外张牙舞爪的我，她就会习惯性的嗔骂一句，我会十分开心。</p>
-<p>又一次我见厨房亮着灯，妈妈看不见一片漆黑中的我，专注地准备晚上的饭菜。这扇窗户就这样隔绝了我俩，没有声音，只有我能看见，我努力地蹦跳呼喊都没有被发觉，慢慢地周围变得安静起来，我是旁观者凝望着只有影像没有声音的画面，心里暖暖的。</p>
-<p>按下门铃我飞快又回到窗前，妈妈脸上的笑让我的世界恢复了声音~</p>
+            <p>十月的天已经黑得很早，下班回家时天已经黑了八九分。</p>
+<p>每次路过窗户的时候，我总喜欢停下来，对窗里的妈妈呼喊几声。以前天黑得晚，看到不进门在外张牙舞爪的我，她会习惯性的嗔骂一句，我就十分开心。</p>
+<p>这一次我见厨房亮着灯，妈正用心地准备晚上的饭菜。我努力地蹦跳呼喊都没有被发觉，才意识到她在里头看不见一片漆黑中的我，也听不到我的声音：这扇窗就这样隔绝了我俩。慢慢地周围变得安静起来，时间的概念逐渐模糊，不知道经历了1秒还是10秒还是1分钟，我是旁观者凝望着只有影像没有声音的画面，心里暖暖的……</p>
+<p>按下门铃我飞快回到窗前，她擦了擦手，转身要去开门，专注的脸上生出笑容。我的世界终于恢复如常。</p>
 
           
         
@@ -514,7 +654,8 @@
       
         
           
-            <p>时隔五年，再次来到顺德，</p>
+            <p>时隔五年，再次来到顺德。</p>
+<p>八九月份的时候和凯哥、林皓商量着，这个十一要，后来看来，十分庆幸当初我们没有选择去张家界，九寨沟，</p>
 
           
         
@@ -666,7 +807,8 @@
       
         
           
-            <p>今天是中秋假期的第一天，早晨眼睛睁开得很干脆，像是被一种力量召唤。</p>
+            <img src="/2018/09/22/oneday/1.jpg">
+<p>今天是中秋假期的第一天，早晨眼睛睁开得很干脆，像是被一种力量召唤。</p>
 <p>眼角余光察觉到窗帘被风吸出窗外，形成一片饱满的穹幕。轻风穿过薄被，透过皮囊，缓缓波动的穹幕就是我此刻的心情。</p>
 <p>不知道是不是幻觉，房间亮的很清澈。浮动的帘幕遮挡住视线，却解放了想象力：我看到了晨光，听到了树叶的声音，站在了高耸入云的楼顶，在一刹那精骛八极，心游万仞……</p>
 <p>兴冲冲，失落落，直为自己早早拉开窗帘的行为懊恼不已。</p>
@@ -1022,7 +1164,7 @@
         
           
             <p>大多数Web 应用都有用户的存在，有用户必然涉及到授权和认证来控制用户行为，除了页面资源以外，访问其他不允许匿名访问的资源（如webapi）也需要经过授权和认证，系统验证了用户身份的合法性之后用户才可以继续访问。这里分两步：授权和认证，认证（Authentication）验证用户的身份；授权（Authorization）决定用户是否有正确的权限获取指定的资源；授权、认证过程可以直接集成到单个应用程序中，对于由众多应用程序形成的生态系统，为其中每一个应用程序都开发自己的用户体系无疑是重复造轮子，而且会随之产生巨大的运维压力，用户信息的新增、撤销和修改需要在多处同时处理，若再有和外部系统对接的需求，则会使事情更加复杂，因此需要将用户授权认证模块从应用程序剥离，作为一个独立的模块供多个系统共用，基于声明（Claim-based）的联合授权认证是一个可行的方案。</p>
-<h1 id="基于声明的授权认证"><a href="#基于声明的授权认证" class="headerlink" title="基于声明的授权认证"></a>基于声明的授权认证</h1><p>基于声明的授权和认证并不是全新的概念，在联合安全模型中，认证和授权过程与应用程序本身分开，认证和授权是另外的单独的Web服务，即安全令牌服务（Security Token Service, STS），STS负责颁发安全令牌；信赖方应用程序（Relying Party，RP）不进行用户认证，不再保存用户名和密码，不关心认证方如何认证，在认证方认证成功之后返回一个令牌，令牌中包含了信赖方需要的用户名、角色、权限等用来认证用户身份的信息。这种方式避免了针对一个用户需要管理多个副本的情况，密码同步的问题也不复存在，并且能满足单点登录（SSO）的场景，用户在登录一个应用程序之后无需再次进行身份认证即可获得访问另一个应用的权限。在基于声明的应用程序中，用户身份将通过一组声明来表示，一个声明可能是用户名，也可能是邮箱地址、年龄等等。<br>基于声明的联合认证方式具有以下特点：</p>
+<h1 id="基于声明的授权认证"><a href="#基于声明的授权认证" class="headerlink" title="基于声明的授权认证"></a>基于声明的授权认证</h1><p>基于声明的授权和认证并不是全新的概念，在联合安全模型中，认证和授权过程与应用程序本身分开，认证和授权是另外的单独的Web服务，即安全令牌服务（Security Token Service, STS），STS负责颁发安全令牌；信赖方应用程序（Relying Party，RP）不进行用户认证，不再保存用户名和密码，不关心认证方如何认证，在认证方认证成功之后接收返回的令牌，令牌中包含了信赖方需要的用户名、角色、权限等用来认证用户身份的信息。这种方式避免了针对一个用户需要管理多个副本的情况，密码同步的问题也不复存在，并且能满足单点登录（SSO）的场景，用户在登录一个应用程序之后无需再次进行身份认证即可获得访问另一个应用的权限。在基于声明的应用程序中，用户身份将通过一组声明来表示，一个声明可能是用户名，也可能是邮箱地址、年龄等等。<br>基于声明的联合认证方式具有以下特点：</p>
 <ul>
 <li>将身份验证机制从应用程序和服务中分离出来，实现与应用程序的松耦合；</li>
 <li>使用声明（Claim）代替角色（Role），声明是一种更灵活、更精确的对象，它可以包括角色及其他信息；</li>
@@ -1037,7 +1179,7 @@
 </ol>
 <p>也就是说，在依赖方与STS服务建立起信任关系之后，当用户请求依赖方应用的资源时，依赖方应用程序不关心登录过程，不关心用户角色，只需要把用户重定向到STS，由STS作验证和返回令牌，依赖方应用程序从令牌中获取需要的信息。</p>
 <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p><strong>声明</strong>是标识信息描述，如：用户名，部门，角色信息等。身份提供者验证成功后会返回一组声明，信赖方应用程序根据声明进行授权；应用程序接收到的声明越多，对用户的了解就越详细；应用程序并不会去某一个路径查询用户的声明，而是用户发送声明给应用程序，应用程序会检测这些声明，通过Issuer 字段表示知道声明的颁发者，应用程序只会接受受信任的颁发者生成的声明。<br><strong>令牌</strong>是声明传输的载体，是发行机构（STS）签名的一组序列化的声明；用户会将一组声明和请求一起通过POST 方式发送给应用程序，在安全性要求不高的场景中也可以使用不签名的声明；<br><strong>STS</strong>，安全令牌服务，一个负责认证用户并颁发令牌的服务，它把声明打包进令牌，对令牌进行签名和加密；<br><strong>依赖方应用程序</strong>即依赖声明的应用程序，它将用户认证逻辑代理出去给STS，提取STS 颁发的令牌中的声明并将它们用于身份验证；  </p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>下面以一个具体场景为例，分析访问过程中的具体HTTP请求进一步理解基于声明的认证：<br>场景中涉及两个应用：一个是依赖方应用（例子中地址为 <code>http://localhost:19851/</code>），需要验证用户身份；一个是用户管理应用，用户数据保存在这里，也在这里对用户信息进行增删改查，同时STS也包含在这个系统中（例子中地址为 <code>http://localhost:62398/</code>）；  </p>
+<h2 id="具体场景"><a href="#具体场景" class="headerlink" title="具体场景"></a>具体场景</h2><p>下面以一个具体场景为例，分析访问过程中的具体HTTP请求进一步理解基于声明的认证：<br>场景中涉及两个应用：一个是依赖方应用（例子中地址为 <code>http://localhost:19851/</code>），需要验证用户身份；一个是用户管理应用，用户数据保存在这里，也在这里对用户信息进行增删改查，同时STS也包含在这个系统中（例子中地址为 <code>http://localhost:62398/</code>）；  </p>
 <img src="/2018/06/22/identity/process.png">
 <ol>
 <li>用户访问依赖方应用；</li>
@@ -1084,7 +1226,7 @@
 <p>配置URL地址与处理程序：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">system.identityModel</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">identityConfiguration</span> <span class="attr">saveBootstrapContext</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">issuerTokenResolver</span> <span class="attr">type</span>=<span class="string">"SimpleWebToken.CustomIssuerTokenResolver, SimpleWebToken"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">AddAudienceKeyPair</span>  <span class="attr">symmetricKey</span>=<span class="string">"wAVkldQiFypTQ+kdNdGWCYCHRcee8XmXxOvgmak8vSY="</span> <span class="attr">audience</span>=<span class="string">"http://localhost:19851/"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">issuerTokenResolver</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">issuerNameRegistry</span> <span class="attr">type</span>=<span class="string">"RelyingParty.TrustedIssuerNameRegistry, RelyingParty"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">audienceUris</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">add</span> <span class="attr">value</span>=<span class="string">"http://localhost:19851/"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">audienceUris</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">securityTokenHandlers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">add</span> <span class="attr">type</span>=<span class="string">"SimpleWebToken.SimpleWebTokenHandler, SimpleWebToken"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">securityTokenHandlers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">identityConfiguration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.identityModel</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">system.identityModel.services</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">federationConfiguration</span> <span class="attr">identityConfigurationName</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">serviceCertificate</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">certificateReference</span> <span class="attr">x509FindType</span>=<span class="string">"FindBySubjectName"</span> <span class="attr">findValue</span>=<span class="string">"localhost"</span> <span class="attr">storeLocation</span>=<span class="string">"LocalMachine"</span> <span class="attr">storeName</span>=<span class="string">"My"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">serviceCertificate</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">wsFederation</span> <span class="attr">passiveRedirectEnabled</span>=<span class="string">"true"</span> <span class="attr">issuer</span>=<span class="string">"http://localhost:62398/"</span> <span class="attr">realm</span> =<span class="string">"http://localhost:19851/"</span> <span class="attr">requireHttps</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">cookieHandler</span> <span class="attr">mode</span>=<span class="string">"Default"</span> <span class="attr">requireSsl</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">chunkedCookieHandler</span> <span class="attr">chunkSize</span>=<span class="string">"2000"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">cookieHandler</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">federationConfiguration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.identityModel.services</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>上述配置中：<br><code>audienceUris</code> 标签指定依赖方应用的URL;<br><code>securityTokenHandlers</code> 标签指定处理token 的类和方法，可以使用自定义的方法或内建的方法；<br><code>issuerNameRegistry</code>标签指定token 处理程序使用的颁发者；<br>配置完成后，访问依赖方应用需要身份认证的页面时会跳转至STS进行登录操作。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>用户授权认证是大多数应用程序都需要经过的流程，目前各种框架种类众多，基于声明的模型中用户身份由一组声明表示，通过配置一个受信任的外部身份系统为我们自己的应用程序提供关于用户的所有必要信息，在这种模型下，单点登录也能较为简单的实现，应用程序本身不处理任何用户认证相关的逻辑，并且不需要保存用户账户和密码等数据，也不用主动查询用户的详细信息，只需从受信任的令牌发布程序接受安全令牌即可。一个新的应用依赖自定义的STS进行身份认证和授权只需要简单的配置，用户管理方便，安全性有保障，对于不适合使用我行现有的统一安全认证平台的单个或多个应用，ASP.NET 基于声明的模型是一个可选的方案。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>用户授权认证是大多数应用程序都需要经过的流程，目前各种框架种类众多，基于声明的模型中用户身份由一组声明表示，通过配置一个受信任的外部身份系统为我们自己的应用程序提供关于用户的所有必要信息，在这种模型下，单点登录也能较为简单的实现，应用程序本身不处理任何用户认证相关的逻辑，并且不需要保存用户账户和密码等数据，也不用主动查询用户的详细信息，只需从受信任的令牌发布程序接受安全令牌即可。一个新的应用依赖自定义的STS进行身份认证和授权也只需要简单的配置。</p>
 
           
         
@@ -1660,140 +1802,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://b.kohaku.cc/2018/03/06/blockchain-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Haku">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content=":: Haku's ::">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/06/blockchain-1/" itemprop="url">区块链初探（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T11:24:34+08:00">
-                2018-03-06 11:24:34
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/06/blockchain-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/03/06/blockchain-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>区块链（Blockchain）最初于2008年被应用于比特币（加密电子货币）上，作为比特币交易的账本；区块链因比特币进入大众视野，发明者中本聪由此名声大振，然而其真实身份至今仍是一个谜，这在互联网时代是一件令人匪夷所思的事情；基于区块链技术的比特币成为了第一个解决了<a href="#两军问题">两军问题</a>的电子货币，与传统货币不同的是，它不需要一个受信任的权威机构或是中心服务器。比特币被发明之后以极快的速度发展，从随处可闻的挖矿新闻就能略知一二，虚拟货币在全球掀起了一场风暴，其底层区块链技术成为各大机构和公司研究的对象。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/06/blockchain-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1848,7 +1856,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1870,7 +1878,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
