@@ -391,9 +391,9 @@
     </summary>
     
     
-      <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
-    
       <category term="programming" scheme="http://b.kohaku.cc/tags/programming/"/>
+    
+      <category term="python" scheme="http://b.kohaku.cc/tags/python/"/>
     
       <category term="django" scheme="http://b.kohaku.cc/tags/django/"/>
     
