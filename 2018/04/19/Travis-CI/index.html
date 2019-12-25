@@ -89,7 +89,7 @@
 <meta property="og:site_name" content=":: Haku&#39;s ::">
 <meta property="og:description" content="使用Travis进行持续集成，会自动配置webhook，在push完成之后执行既定操作。  直接使用Github账号登录Travis， 勾选需要持续集成的代码库；   在项目根目录添加.travis.yml文件：1234567language: pythonpython:  - &quot;3.6&quot;install:  - pip install -r requirements.txtscript:  - p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-19T09:35:02.478Z">
+<meta property="og:updated_time" content="2018-12-26T01:46:13.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Travis 持续集成">
 <meta name="twitter:description" content="使用Travis进行持续集成，会自动配置webhook，在push完成之后执行既定操作。  直接使用Github账号登录Travis， 勾选需要持续集成的代码库；   在项目根目录添加.travis.yml文件：1234567language: pythonpython:  - &quot;3.6&quot;install:  - pip install -r requirements.txtscript:  - p">
@@ -379,6 +379,9 @@
 </ul>
 </li>
 </ul>
+<blockquote><p>注：TravisCI不支持MSTest，因为MSTest只能在Windows下运行，而目前Travis只在Linux 或者OSX上通过Mono或.Net Core runtime构建C#项目；</p>
+</blockquote>
+<p>在README.md文件增加以下内容，显示构建徽章；<br><code>[![Build Status](https://www.travis-ci.org/VincentGau/pythonScripts.svg?branch=master)](https://www.travis-ci.org/VincentGau/pythonScripts)</code></p>
 
       
     </div>
@@ -500,7 +503,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -511,7 +514,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -522,7 +525,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -582,7 +585,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

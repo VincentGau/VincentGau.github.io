@@ -4,6 +4,70 @@
 
     
   <url>
+    <loc>http://b.kohaku.cc/2019/12/25/poetry-qq-bot/</loc>
+    <lastmod>2019-12-25T07:45:14.657Z</lastmod>
+    <data>
+        <display>
+        <title>飞花令助手</title>
+        <pubTime>2019-12-25T06:15:47.000Z</pubTime>
+        
+        <tag>诗词</tag>
+         
+         
+           
+             
+              <breadCrumb title="诗词" url="http://b.kohaku.cc/categories/%E8%AF%97%E8%AF%8D/"/>
+          
+             
+              <breadCrumb title="飞花令" url="http://b.kohaku.cc/categories/%E8%AF%97%E8%AF%8D/%E9%A3%9E%E8%8A%B1%E4%BB%A4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/12/22/cross-origin-request/</loc>
+    <lastmod>2019-12-25T03:38:27.101Z</lastmod>
+    <data>
+        <display>
+        <title>如何解决跨域请求问题</title>
+        <pubTime>2018-12-22T11:16:53.000Z</pubTime>
+        
+        <tag>cors</tag>
+         
+         
+           
+             
+              <breadCrumb title="programming" url="http://b.kohaku.cc/categories/programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://b.kohaku.cc/2018/04/19/Travis-CI/</loc>
+    <lastmod>2018-12-26T01:46:13.717Z</lastmod>
+    <data>
+        <display>
+        <title>Travis 持续集成</title>
+        <pubTime>2018-04-19T07:05:04.000Z</pubTime>
+        
+        <tag>CI</tag>
+         
+        <tag>Travis</tag>
+         
+        <tag>Github</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://b.kohaku.cc/2018/06/22/identity/</loc>
     <lastmod>2018-11-27T07:37:43.843Z</lastmod>
     <data>
@@ -86,27 +150,6 @@
 
     
   <url>
-    <loc>http://b.kohaku.cc/2018/10/11/travelsd/</loc>
-    <lastmod>2018-10-18T02:28:47.728Z</lastmod>
-    <data>
-        <display>
-        <title>2018顺德之旅</title>
-        <pubTime>2018-10-11T02:48:24.000Z</pubTime>
-        
-        <tag>family</tag>
-         
-        <tag>travel</tag>
-         
-        <tag>顺德</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://b.kohaku.cc/2018/08/10/HakuGo/</loc>
     <lastmod>2018-08-10T07:49:22.116Z</lastmod>
     <data>
@@ -159,27 +202,6 @@
         <pubTime>2018-03-06T03:24:34.000Z</pubTime>
         
         <tag>blockchain</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://b.kohaku.cc/2018/04/19/Travis-CI/</loc>
-    <lastmod>2018-04-19T09:35:02.478Z</lastmod>
-    <data>
-        <display>
-        <title>Travis 持续集成</title>
-        <pubTime>2018-04-19T07:05:04.000Z</pubTime>
-        
-        <tag>CI</tag>
-         
-        <tag>Travis</tag>
-         
-        <tag>Github</tag>
          
          
            
@@ -256,9 +278,9 @@
         <title>Django 笔记</title>
         <pubTime>2018-01-12T06:59:48.000Z</pubTime>
         
-        <tag>programming</tag>
-         
         <tag>python</tag>
+         
+        <tag>programming</tag>
          
         <tag>django</tag>
          
